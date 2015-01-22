@@ -137,8 +137,8 @@ namespace OpenTK.Platform.Android
 			size = new Size (surfaceRect.Right - surfaceRect.Left, surfaceRect.Bottom - surfaceRect.Top);
 
 			if (Context != null) {
-				GLCalls.Viewport (0, 0, size.Width, size.Height);
-				GLCalls.Scissor (0, 0, size.Width, size.Height);
+			//	OpenTK.Graphics.ES11.GL.Viewport (0, 0, size.Width, size.Height);
+				//OpenTK.Graphics.ES11.GL.Scissor (0, 0, size.Width, size.Height);
 			}
 
 			OnResize (EventArgs.Empty);
@@ -203,7 +203,7 @@ namespace OpenTK.Platform.Android
 				CreateContext ();
 			AssertContext ();
 			try	{
-				GraphicsContext.MakeCurrent (WindowInfo);
+			//	GraphicsContext.MakeCurrent (WindowInfo);
 			}
 			catch (EglBadAllocException) {
 				log ("Bad Allocation");
@@ -363,7 +363,7 @@ namespace OpenTK.Platform.Android
 					}
 					MakeCurrent ();
 				}
-				catch(Exception)	{
+				catch(Exception e)	{
 					hasSurface = false;
 				}
 			}
