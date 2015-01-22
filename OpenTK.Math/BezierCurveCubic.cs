@@ -15,10 +15,10 @@ using System.Text;
 namespace OpenTK
 {
     /// <summary>
-    /// Represents a quadric bezier curve with two anchor and one control point.
+    /// Represents a cubic bezier curve with two anchor and two control points.
     /// </summary>
-    [Serializable]
-    public struct BezierCurveQuadric
+    
+    public struct BezierCurveCubic
     {
         #region Fields
 
@@ -33,12 +33,17 @@ namespace OpenTK
         public Vector2 EndAnchor;
 
         /// <summary>
-        /// Control point, controls the direction of both endings of the curve.
+        /// First control point, controls the direction of the curve start.
         /// </summary>
-        public Vector2 ControlPoint;
+        public Vector2 FirstControlPoint;
 
         /// <summary>
-        /// The parallel value.
+        /// Second control point, controls the direction of the curve end.
+        /// </summary>
+        public Vector2 SecondControlPoint;
+
+        /// <summary>
+        /// Gets or sets the parallel value.
         /// </summary>
         /// <remarks>This value defines whether the curve should be calculated as a
         /// parallel curve to the original bezier curve. A value of 0.0f represents
@@ -51,32 +56,36 @@ namespace OpenTK
         #region Constructors
 
         /// <summary>
-        /// Constructs a new <see cref="BezierCurveQuadric"/>.
+        /// Constructs a new <see cref="BezierCurveCubic"/>.
         /// </summary>
-        /// <param name="startAnchor">The start anchor.</param>
-        /// <param name="endAnchor">The end anchor.</param>
-        /// <param name="controlPoint">The control point.</param>
-        public BezierCurveQuadric(Vector2 startAnchor, Vector2 endAnchor, Vector2 controlPoint)
+        /// <param name="startAnchor">The start anchor point.</param>
+        /// <param name="endAnchor">The end anchor point.</param>
+        /// <param name="firstControlPoint">The first control point.</param>
+        /// <param name="secondControlPoint">The second control point.</param>
+        public BezierCurveCubic(Vector2 startAnchor, Vector2 endAnchor, Vector2 firstControlPoint, Vector2 secondControlPoint)
         {
             this.StartAnchor = startAnchor;
             this.EndAnchor = endAnchor;
-            this.ControlPoint = controlPoint;
+            this.FirstControlPoint = firstControlPoint;
+            this.SecondControlPoint = secondControlPoint;
             this.Parallel = 0.0f;
         }
 
         /// <summary>
-        /// Constructs a new <see cref="BezierCurveQuadric"/>.
+        /// Constructs a new <see cref="BezierCurveCubic"/>.
         /// </summary>
         /// <param name="parallel">The parallel value.</param>
-        /// <param name="startAnchor">The start anchor.</param>
-        /// <param name="endAnchor">The end anchor.</param>
-        /// <param name="controlPoint">The control point.</param>
-        public BezierCurveQuadric(float parallel, Vector2 startAnchor, Vector2 endAnchor, Vector2 controlPoint)
+        /// <param name="startAnchor">The start anchor point.</param>
+        /// <param name="endAnchor">The end anchor point.</param>
+        /// <param name="firstControlPoint">The first control point.</param>
+        /// <param name="secondControlPoint">The second control point.</param>
+        public BezierCurveCubic(float parallel, Vector2 startAnchor, Vector2 endAnchor, Vector2 firstControlPoint, Vector2 secondControlPoint)
         {
             this.Parallel = parallel;
             this.StartAnchor = startAnchor;
             this.EndAnchor = endAnchor;
-            this.ControlPoint = controlPoint;
+            this.FirstControlPoint = firstControlPoint;
+            this.SecondControlPoint = secondControlPoint;
         }
 
         #endregion
@@ -93,8 +102,10 @@ namespace OpenTK
             Vector2 r = new Vector2();
             float c = 1.0f - t;
 
-            r.X = (c * c * StartAnchor.X) + (2 * t * c * ControlPoint.X) + (t * t * EndAnchor.X);
-            r.Y = (c * c * StartAnchor.Y) + (2 * t * c * ControlPoint.Y) + (t * t * EndAnchor.Y);
+            r.X = (StartAnchor.X * c * c * c) + (FirstControlPoint.X * 3 * t * c * c) + (SecondControlPoint.X * 3 * t * t * c)
+                + EndAnchor.X * t * t * t;
+            r.Y = (StartAnchor.Y * c * c * c) + (FirstControlPoint.Y * 3 * t * c * c) + (SecondControlPoint.Y * 3 * t * t * c)
+                + EndAnchor.Y * t * t * t;
 
             if (Parallel == 0.0f)
                 return r;
@@ -102,7 +113,7 @@ namespace OpenTK
             Vector2 perpendicular = new Vector2();
 
             if (t == 0.0f)
-                perpendicular = ControlPoint - StartAnchor;
+                perpendicular = FirstControlPoint - StartAnchor;
             else
                 perpendicular = r - CalculatePointOfDerivative(t);
 
@@ -117,9 +128,10 @@ namespace OpenTK
         private Vector2 CalculatePointOfDerivative(float t)
         {
             Vector2 r = new Vector2();
+            float c = 1.0f - t;
 
-            r.X = (1.0f - t) * StartAnchor.X + t * ControlPoint.X;
-            r.Y = (1.0f - t) * StartAnchor.Y + t * ControlPoint.Y;
+            r.X = (c * c * StartAnchor.X) + (2 * t * c * FirstControlPoint.X) + (t * t * SecondControlPoint.X);
+            r.Y = (c * c * StartAnchor.Y) + (2 * t * c * FirstControlPoint.Y) + (t * t * SecondControlPoint.Y);
 
             return r;
         }
@@ -128,7 +140,7 @@ namespace OpenTK
         /// Calculates the length of this bezier curve.
         /// </summary>
         /// <param name="precision">The precision.</param>
-        /// <returns>Length of curve.</returns>
+        /// <returns>Length of the curve.</returns>
         /// <remarks>The precision gets better when the <paramref name="precision"/>
         /// value gets smaller.</remarks>
         public float CalculateLength(float precision)

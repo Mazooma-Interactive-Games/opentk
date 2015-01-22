@@ -31,8 +31,7 @@ namespace OpenTK
     /// <summary>Represents a 2D vector using two single-precision floating-point numbers.</summary>
     /// <remarks>
     /// The Vector2 structure is suitable for interoperation with unmanaged code requiring two consecutive floats.
-    /// </remarks>
-    [Serializable]
+    /// </remarks>    
     [StructLayout(LayoutKind.Sequential)]
     public struct Vector2 : IEquatable<Vector2>
     {

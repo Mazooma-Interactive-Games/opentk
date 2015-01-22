@@ -17,7 +17,7 @@ namespace OpenTK
     /// <summary>
     /// Represents a bezier curve with as many points as you want.
     /// </summary>
-    [Serializable]
+    
     public struct BezierCurve
     {
         #region Fields

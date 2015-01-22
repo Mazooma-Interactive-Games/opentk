@@ -32,8 +32,8 @@ namespace OpenTK
 {
 
     /// <summary>2-component Vector of the Half type. Occupies 4 Byte total.</summary>
-    [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct Vector2h : ISerializable, IEquatable<Vector2h>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vector2h : IEquatable<Vector2h>
     {
         #region Fields
 
@@ -268,28 +268,6 @@ namespace OpenTK
         public static readonly int SizeInBytes = 4;
 
         #endregion Constants
-
-        #region ISerializable
-
-        /// <summary>Constructor used by ISerializable to deserialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public Vector2h(SerializationInfo info, StreamingContext context)
-        {
-            this.X = (Half)info.GetValue("X", typeof(Half));
-            this.Y = (Half)info.GetValue("Y", typeof(Half));
-        }
-
-        /// <summary>Used by ISerialize to serialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("X", this.X);
-            info.AddValue("Y", this.Y);
-        }
-
-        #endregion ISerializable
 
         #region Binary dump
 

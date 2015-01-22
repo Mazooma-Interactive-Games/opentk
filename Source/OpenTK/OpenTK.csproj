@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
@@ -14,7 +14,7 @@
     <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
     <DefaultTargetSchema>IE50</DefaultTargetSchema>
     <DelaySign>false</DelaySign>
-    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>
     </AppDesignerFolder>
@@ -40,6 +40,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -57,6 +58,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -74,6 +76,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>pdbonly</DebugType>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Documentation|AnyCPU'">
     <OutputPath>..\..\Binaries\OpenTK\Release\</OutputPath>
@@ -86,6 +89,7 @@
     <DebugType>pdbonly</DebugType>
     <DebugSymbols>true</DebugSymbols>
     <DocumentationFile>..\..\Binaries\OpenTK\Release\OpenTK.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Nsis|AnyCPU'">
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
@@ -103,6 +107,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
     <DebugSymbols>True</DebugSymbols>
     <DebugType>pdbonly</DebugType>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>True</SignAssembly>
@@ -147,21 +152,6 @@
     <Compile Include="Input\JoystickCapabilities.cs" />
     <Compile Include="Input\JoystickState.cs" />
     <Compile Include="InteropHelper.cs" />
-    <Compile Include="Math\Matrix2.cs" />
-    <Compile Include="Math\Matrix2d.cs" />
-    <Compile Include="Math\Matrix2x3.cs" />
-    <Compile Include="Math\Matrix2x3d.cs" />
-    <Compile Include="Math\Matrix2x4.cs" />
-    <Compile Include="Math\Matrix2x4d.cs" />
-    <Compile Include="Math\Matrix3.cs" />
-    <Compile Include="Math\Matrix3x2.cs" />
-    <Compile Include="Math\Matrix3x2d.cs" />
-    <Compile Include="Math\Matrix3x4.cs" />
-    <Compile Include="Math\Matrix3x4d.cs" />
-    <Compile Include="Math\Matrix4x2.cs" />
-    <Compile Include="Math\Matrix4x2d.cs" />
-    <Compile Include="Math\Matrix4x3.cs" />
-    <Compile Include="Math\Matrix4x3d.cs" />
     <Compile Include="Platform\DisplayDeviceBase.cs" />
     <Compile Include="Platform\Egl\EglUnixContext.cs" />
     <Compile Include="Platform\Egl\EglWinContext.cs" />
@@ -496,78 +486,6 @@
     <Compile Include="Input\IInputDevice.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Math\Quaternion.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Matrix3d.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector4.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\BezierCurve.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector3.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Functions.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Matrix4d.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector2d.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector2h.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector3h.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Point.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Box2.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Matrix4.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Half.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector4d.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Rectangle.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector2.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\BezierCurveQuadric.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\MathHelper.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Quaterniond.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector4h.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Size.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\Vector3d.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Math\BezierCurveCubic.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Compute\CL10\ErrorHelper.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -776,7 +694,12 @@
     <PostBuildEvent>
     </PostBuildEvent>
   </PropertyGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenTK.Math\OpenTK.Math.csproj">
+      <Project>{767ed049-581c-45ff-80a4-335827719124}</Project>
+      <Name>OpenTK.Math</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Target Name="AfterBuild">
     <Exec Command="$(OutputPath)..\..\Tools\Debug\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk -debug" Condition="$(OS) == 'Windows_NT' and $(Configuration) == 'Debug'" />
     <Exec Command="$(OutputPath)..\..\Tools\Release\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk" Condition="$(OS) == 'Windows_NT' and $(Configuration) != 'Debug'" />
@@ -797,11 +720,5 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup>
-    <Folder Include="Compute\CL20\" />
-    <Folder Include="Compute\CL12\" />
-    <Folder Include="Extensions\" />
-    <Folder Include="Compute\CL11\" />
-    <Folder Include="Graphics\ES10\" />
-  </ItemGroup>
+  <ItemGroup />
 </Project>

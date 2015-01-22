@@ -33,8 +33,8 @@ namespace OpenTK
     /// <summary>
     /// 4-component Vector of the Half type. Occupies 8 Byte total.
     /// </summary>
-    [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct Vector4h : ISerializable, IEquatable<Vector4h>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Vector4h : IEquatable<Vector4h>
     {
         #region Public Fields
 
@@ -701,56 +701,6 @@ namespace OpenTK
         public static readonly int SizeInBytes = 8;
 
         #endregion Constants
-
-        #region ISerializable
-
-        /// <summary>Constructor used by ISerializable to deserialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public Vector4h(SerializationInfo info, StreamingContext context)
-        {
-            this.X = (Half)info.GetValue("X", typeof(Half));
-            this.Y = (Half)info.GetValue("Y", typeof(Half));
-            this.Z = (Half)info.GetValue("Z", typeof(Half));
-            this.W = (Half)info.GetValue("W", typeof(Half));
-        }
-
-        /// <summary>Used by ISerialize to serialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("X", this.X);
-            info.AddValue("Y", this.Y);
-            info.AddValue("Z", this.Z);
-            info.AddValue("W", this.W);
-        }
-
-        #endregion ISerializable
-
-        #region Binary dump
-
-        /// <summary>Updates the X,Y,Z and W components of this instance by reading from a Stream.</summary>
-        /// <param name="bin">A BinaryReader instance associated with an open Stream.</param>
-        public void FromBinaryStream(BinaryReader bin)
-        {
-            X.FromBinaryStream(bin);
-            Y.FromBinaryStream(bin);
-            Z.FromBinaryStream(bin);
-            W.FromBinaryStream(bin);
-        }
-
-        /// <summary>Writes the X,Y,Z and W components of this instance into a Stream.</summary>
-        /// <param name="bin">A BinaryWriter instance associated with an open Stream.</param>
-        public void ToBinaryStream(BinaryWriter bin)
-        {
-            X.ToBinaryStream(bin);
-            Y.ToBinaryStream(bin);
-            Z.ToBinaryStream(bin);
-            W.ToBinaryStream(bin);
-        }
-
-        #endregion Binary dump
 
         #region IEquatable<Half4> Members
 

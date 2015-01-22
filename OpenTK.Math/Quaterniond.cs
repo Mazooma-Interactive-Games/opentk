@@ -33,7 +33,7 @@ namespace OpenTK
     /// <summary>
     /// Represents a double-precision Quaternion.
     /// </summary>
-    [Serializable]
+    
     [StructLayout(LayoutKind.Sequential)]
     public struct Quaterniond : IEquatable<Quaterniond>
     {

@@ -25,70 +25,72 @@ SOFTWARE.
 using System;
 using System.Runtime.InteropServices;
 using System.Xml.Serialization;
-
 namespace OpenTK
 {
-    /// <summary>Represents a 4D vector using four double-precision floating-point numbers.</summary>
-    [Serializable]
+    /// <summary>Represents a 4D vector using four single-precision floating-point numbers.</summary>
+    /// <remarks>
+    /// The Vector4 structure is suitable for interoperation with unmanaged code requiring four consecutive floats.
+    /// </remarks>
+    
     [StructLayout(LayoutKind.Sequential)]
-    public struct Vector4d : IEquatable<Vector4d>
+    public struct Vector4 : IEquatable<Vector4>
     {
         #region Fields
 
         /// <summary>
-        /// The X component of the Vector4d.
+        /// The X component of the Vector4.
         /// </summary>
-        public double X;
+        public float X;
 
         /// <summary>
-        /// The Y component of the Vector4d.
+        /// The Y component of the Vector4.
         /// </summary>
-        public double Y;
+        public float Y;
 
         /// <summary>
-        /// The Z component of the Vector4d.
+        /// The Z component of the Vector4.
         /// </summary>
-        public double Z;
+        public float Z;
 
         /// <summary>
-        /// The W component of the Vector4d.
+        /// The W component of the Vector4.
         /// </summary>
-        public double W;
+        public float W;
 
         /// <summary>
-        /// Defines a unit-length Vector4d that points towards the X-axis.
+        /// Defines a unit-length Vector4 that points towards the X-axis.
         /// </summary>
-        public static readonly Vector4d UnitX = new Vector4d(1, 0, 0, 0);
+        public static readonly Vector4 UnitX = new Vector4(1, 0, 0, 0);
 
         /// <summary>
-        /// Defines a unit-length Vector4d that points towards the Y-axis.
+        /// Defines a unit-length Vector4 that points towards the Y-axis.
         /// </summary>
-        public static readonly Vector4d UnitY = new Vector4d(0, 1, 0, 0);
+        public static readonly Vector4 UnitY = new Vector4(0, 1, 0, 0);
 
         /// <summary>
-        /// Defines a unit-length Vector4d that points towards the Z-axis.
+        /// Defines a unit-length Vector4 that points towards the Z-axis.
         /// </summary>
-        public static readonly Vector4d UnitZ = new Vector4d(0, 0, 1, 0);
+        public static readonly Vector4 UnitZ = new Vector4(0, 0, 1, 0);
 
         /// <summary>
-        /// Defines a unit-length Vector4d that points towards the W-axis.
+        /// Defines a unit-length Vector4 that points towards the W-axis.
         /// </summary>
-        public static readonly Vector4d UnitW = new Vector4d(0, 0, 0, 1);
+        public static readonly Vector4 UnitW = new Vector4(0, 0, 0, 1);
 
         /// <summary>
-        /// Defines a zero-length Vector4d.
+        /// Defines a zero-length Vector4.
         /// </summary>
-        public static readonly Vector4d Zero = new Vector4d(0, 0, 0, 0);
+        public static readonly Vector4 Zero = new Vector4(0, 0, 0, 0);
 
         /// <summary>
         /// Defines an instance with all components set to 1.
         /// </summary>
-        public static readonly Vector4d One = new Vector4d(1, 1, 1, 1);
+        public static readonly Vector4 One = new Vector4(1, 1, 1, 1);
 
         /// <summary>
-        /// Defines the size of the Vector4d struct in bytes.
+        /// Defines the size of the Vector4 struct in bytes.
         /// </summary>
-        public static readonly int SizeInBytes = Marshal.SizeOf(new Vector4d());
+        public static readonly int SizeInBytes = Marshal.SizeOf(new Vector4());
 
         #endregion
 
@@ -98,7 +100,7 @@ namespace OpenTK
         /// Constructs a new instance.
         /// </summary>
         /// <param name="value">The value that will initialize this instance.</param>
-        public Vector4d(double value)
+        public Vector4(float value)
         {
             X = value;
             Y = value;
@@ -107,13 +109,13 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Constructs a new Vector4d.
+        /// Constructs a new Vector4.
         /// </summary>
-        /// <param name="x">The x component of the Vector4d.</param>
-        /// <param name="y">The y component of the Vector4d.</param>
-        /// <param name="z">The z component of the Vector4d.</param>
-        /// <param name="w">The w component of the Vector4d.</param>
-        public Vector4d(double x, double y, double z, double w)
+        /// <param name="x">The x component of the Vector4.</param>
+        /// <param name="y">The y component of the Vector4.</param>
+        /// <param name="z">The z component of the Vector4.</param>
+        /// <param name="w">The w component of the Vector4.</param>
+        public Vector4(float x, float y, float z, float w)
         {
             X = x;
             Y = y;
@@ -122,10 +124,10 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the given Vector2d.
+        /// Constructs a new Vector4 from the given Vector2.
         /// </summary>
-        /// <param name="v">The Vector2d to copy components from.</param>
-        public Vector4d(Vector2d v)
+        /// <param name="v">The Vector2 to copy components from.</param>
+        public Vector4(Vector2 v)
         {
             X = v.X;
             Y = v.Y;
@@ -134,12 +136,12 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the given Vector3d.
+        /// Constructs a new Vector4 from the given Vector3.
         /// The w component is initialized to 0.
         /// </summary>
-        /// <param name="v">The Vector3d to copy components from.</param>
-        /// <remarks><seealso cref="Vector4d(Vector3d, double)"/></remarks>
-        public Vector4d(Vector3d v)
+        /// <param name="v">The Vector3 to copy components from.</param>
+        /// <remarks><seealso cref="Vector4(Vector3, float)"/></remarks>
+        public Vector4(Vector3 v)
         {
             X = v.X;
             Y = v.Y;
@@ -148,11 +150,11 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the specified Vector3d and w component.
+        /// Constructs a new Vector4 from the specified Vector3 and w component.
         /// </summary>
-        /// <param name="v">The Vector3d to copy components from.</param>
+        /// <param name="v">The Vector3 to copy components from.</param>
         /// <param name="w">The w component of the new Vector4.</param>
-        public Vector4d(Vector3d v, double w)
+        public Vector4(Vector3 v, float w)
         {
             X = v.X;
             Y = v.Y;
@@ -161,10 +163,10 @@ namespace OpenTK
         }
 
         /// <summary>
-        /// Constructs a new Vector4d from the given Vector4d.
+        /// Constructs a new Vector4 from the given Vector4.
         /// </summary>
-        /// <param name="v">The Vector4d to copy components from.</param>
-        public Vector4d(Vector4d v)
+        /// <param name="v">The Vector4 to copy components from.</param>
+        public Vector4(Vector4 v)
         {
             X = v.X;
             Y = v.Y;
@@ -175,11 +177,11 @@ namespace OpenTK
         #endregion
 
         #region Public Members
-        
+
         /// <summary>
         /// Gets or sets the value at the index of the Vector.
         /// </summary>
-        public double this[int index] {
+        public float this[int index] {
             get{
                 if(index == 0) return X;
                 else if(index == 1) return Y;
@@ -203,7 +205,7 @@ namespace OpenTK
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Add() method instead.")]
-        public void Add(Vector4d right)
+        public void Add(Vector4 right)
         {
             this.X += right.X;
             this.Y += right.Y;
@@ -215,7 +217,7 @@ namespace OpenTK
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Add() method instead.")]
-        public void Add(ref Vector4d right)
+        public void Add(ref Vector4 right)
         {
             this.X += right.X;
             this.Y += right.Y;
@@ -231,7 +233,7 @@ namespace OpenTK
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Subtract() method instead.")]
-        public void Sub(Vector4d right)
+        public void Sub(Vector4 right)
         {
             this.X -= right.X;
             this.Y -= right.Y;
@@ -243,7 +245,7 @@ namespace OpenTK
         /// <param name="right">Right operand. This parameter is only read from.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Subtract() method instead.")]
-        public void Sub(ref Vector4d right)
+        public void Sub(ref Vector4 right)
         {
             this.X -= right.X;
             this.Y -= right.Y;
@@ -258,7 +260,7 @@ namespace OpenTK
         /// <summary>Multiply this instance by a scalar.</summary>
         /// <param name="f">Scalar operand.</param>
         [Obsolete("Use static Multiply() method instead.")]
-        public void Mult(double f)
+        public void Mult(float f)
         {
             this.X *= f;
             this.Y *= f;
@@ -273,9 +275,9 @@ namespace OpenTK
         /// <summary>Divide this instance by a scalar.</summary>
         /// <param name="f">Scalar operand.</param>
         [Obsolete("Use static Divide() method instead.")]
-        public void Div(double f)
+        public void Div(float f)
         {
-            double mult = 1.0 / f;
+            float mult = 1.0f / f;
             this.X *= mult;
             this.Y *= mult;
             this.Z *= mult;
@@ -284,24 +286,24 @@ namespace OpenTK
 
         #endregion public void Div()
 
-        #region public double Length
+        #region public float Length
 
         /// <summary>
         /// Gets the length (magnitude) of the vector.
         /// </summary>
         /// <see cref="LengthFast"/>
         /// <seealso cref="LengthSquared"/>
-        public double Length
+        public float Length
         {
             get
             {
-                return System.Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
+                return (float)System.Math.Sqrt(X * X + Y * Y + Z * Z + W * W);
             }
         }
 
         #endregion
 
-        #region public double LengthFast
+        #region public float LengthFast
 
         /// <summary>
         /// Gets an approximation of the vector length (magnitude).
@@ -312,17 +314,17 @@ namespace OpenTK
         /// </remarks>
         /// <see cref="Length"/>
         /// <seealso cref="LengthSquared"/>
-        public double LengthFast
+        public float LengthFast
         {
             get
             {
-                return 1.0 / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
+                return 1.0f / MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
             }
         }
 
         #endregion
 
-        #region public double LengthSquared
+        #region public float LengthSquared
 
         /// <summary>
         /// Gets the square of the vector length (magnitude).
@@ -332,7 +334,8 @@ namespace OpenTK
         /// for comparisons.
         /// </remarks>
         /// <see cref="Length"/>
-        public double LengthSquared
+        /// <seealso cref="LengthFast"/>
+        public float LengthSquared
         {
             get
             {
@@ -343,11 +346,11 @@ namespace OpenTK
         #endregion
 
         /// <summary>
-        /// Returns a copy of the Vector4d scaled to unit length.
+        /// Returns a copy of the Vector4 scaled to unit length.
         /// </summary>
-        public Vector4d Normalized()
+        public Vector4 Normalized()
         {
-            Vector4d v = this;
+            Vector4 v = this;
             v.Normalize();
             return v;
         }
@@ -355,11 +358,11 @@ namespace OpenTK
         #region public void Normalize()
 
         /// <summary>
-        /// Scales the Vector4d to unit length.
+        /// Scales the Vector4 to unit length.
         /// </summary>
         public void Normalize()
         {
-            double scale = 1.0 / this.Length;
+            float scale = 1.0f / this.Length;
             X *= scale;
             Y *= scale;
             Z *= scale;
@@ -371,11 +374,11 @@ namespace OpenTK
         #region public void NormalizeFast()
 
         /// <summary>
-        /// Scales the Vector4d to approximately unit length.
+        /// Scales the Vector4 to approximately unit length.
         /// </summary>
         public void NormalizeFast()
         {
-            double scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
+            float scale = MathHelper.InverseSqrtFast(X * X + Y * Y + Z * Z + W * W);
             X *= scale;
             Y *= scale;
             Z *= scale;
@@ -387,14 +390,14 @@ namespace OpenTK
         #region public void Scale()
 
         /// <summary>
-        /// Scales the current Vector4d by the given amounts.
+        /// Scales the current Vector4 by the given amounts.
         /// </summary>
         /// <param name="sx">The scale of the X component.</param>
         /// <param name="sy">The scale of the Y component.</param>
         /// <param name="sz">The scale of the Z component.</param>
         /// <param name="sw">The scale of the Z component.</param>
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(double sx, double sy, double sz, double sw)
+        public void Scale(float sx, float sy, float sz, float sw)
         {
             this.X = X * sx;
             this.Y = Y * sy;
@@ -406,7 +409,7 @@ namespace OpenTK
         /// <param name="scale">The scaling of the individual components.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(Vector4d scale)
+        public void Scale(Vector4 scale)
         {
             this.X *= scale.X;
             this.Y *= scale.Y;
@@ -418,7 +421,7 @@ namespace OpenTK
         /// <param name="scale">The scaling of the individual components.</param>
         [CLSCompliant(false)]
         [Obsolete("Use static Multiply() method instead.")]
-        public void Scale(ref Vector4d scale)
+        public void Scale(ref Vector4 scale)
         {
             this.X *= scale.X;
             this.Y *= scale.Y;
@@ -442,8 +445,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>Result of subtraction</returns>
-        [Obsolete("Use static Subtract() method instead.")]
-        public static Vector4d Sub(Vector4d a, Vector4d b)
+        public static Vector4 Sub(Vector4 a, Vector4 b)
         {
             a.X -= b.X;
             a.Y -= b.Y;
@@ -458,8 +460,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">Result of subtraction</param>
-        [Obsolete("Use static Subtract() method instead.")]
-        public static void Sub(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Sub(ref Vector4 a, ref Vector4 b, out Vector4 result)
         {
             result.X = a.X - b.X;
             result.Y = a.Y - b.Y;
@@ -477,8 +478,7 @@ namespace OpenTK
         /// <param name="a">Vector operand</param>
         /// <param name="f">Scalar operand</param>
         /// <returns>Result of the multiplication</returns>
-        [Obsolete("Use static Multiply() method instead.")]
-        public static Vector4d Mult(Vector4d a, double f)
+        public static Vector4 Mult(Vector4 a, float f)
         {
             a.X *= f;
             a.Y *= f;
@@ -493,8 +493,7 @@ namespace OpenTK
         /// <param name="a">Vector operand</param>
         /// <param name="f">Scalar operand</param>
         /// <param name="result">Result of the multiplication</param>
-        [Obsolete("Use static Multiply() method instead.")]
-        public static void Mult(ref Vector4d a, double f, out Vector4d result)
+        public static void Mult(ref Vector4 a, float f, out Vector4 result)
         {
             result.X = a.X * f;
             result.Y = a.Y * f;
@@ -512,10 +511,9 @@ namespace OpenTK
         /// <param name="a">Vector operand</param>
         /// <param name="f">Scalar operand</param>
         /// <returns>Result of the division</returns>
-        [Obsolete("Use static Divide() method instead.")]
-        public static Vector4d Div(Vector4d a, double f)
+        public static Vector4 Div(Vector4 a, float f)
         {
-            double mult = 1.0 / f;
+            float mult = 1.0f / f;
             a.X *= mult;
             a.Y *= mult;
             a.Z *= mult;
@@ -529,10 +527,9 @@ namespace OpenTK
         /// <param name="a">Vector operand</param>
         /// <param name="f">Scalar operand</param>
         /// <param name="result">Result of the division</param>
-        [Obsolete("Use static Divide() method instead.")]
-        public static void Div(ref Vector4d a, double f, out Vector4d result)
+        public static void Div(ref Vector4 a, float f, out Vector4 result)
         {
-            double mult = 1.0 / f;
+            float mult = 1.0f / f;
             result.X = a.X * mult;
             result.Y = a.Y * mult;
             result.Z = a.Z * mult;
@@ -551,7 +548,7 @@ namespace OpenTK
         /// <param name="a">Left operand.</param>
         /// <param name="b">Right operand.</param>
         /// <returns>Result of operation.</returns>
-        public static Vector4d Add(Vector4d a, Vector4d b)
+        public static Vector4 Add(Vector4 a, Vector4 b)
         {
             Add(ref a, ref b, out a);
             return a;
@@ -563,9 +560,9 @@ namespace OpenTK
         /// <param name="a">Left operand.</param>
         /// <param name="b">Right operand.</param>
         /// <param name="result">Result of operation.</param>
-        public static void Add(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Add(ref Vector4 a, ref Vector4 b, out Vector4 result)
         {
-            result = new Vector4d(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.W + b.W);
+            result = new Vector4(a.X + b.X, a.Y + b.Y, a.Z + b.Z, a.W + b.W);
         }
 
         #endregion
@@ -578,7 +575,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>Result of subtraction</returns>
-        public static Vector4d Subtract(Vector4d a, Vector4d b)
+        public static Vector4 Subtract(Vector4 a, Vector4 b)
         {
             Subtract(ref a, ref b, out a);
             return a;
@@ -590,9 +587,9 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">Result of subtraction</param>
-        public static void Subtract(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Subtract(ref Vector4 a, ref Vector4 b, out Vector4 result)
         {
-            result = new Vector4d(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
+            result = new Vector4(a.X - b.X, a.Y - b.Y, a.Z - b.Z, a.W - b.W);
         }
 
         #endregion
@@ -605,7 +602,7 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Multiply(Vector4d vector, double scale)
+        public static Vector4 Multiply(Vector4 vector, float scale)
         {
             Multiply(ref vector, scale, out vector);
             return vector;
@@ -617,9 +614,9 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Multiply(ref Vector4d vector, double scale, out Vector4d result)
+        public static void Multiply(ref Vector4 vector, float scale, out Vector4 result)
         {
-            result = new Vector4d(vector.X * scale, vector.Y * scale, vector.Z * scale, vector.W * scale);
+            result = new Vector4(vector.X * scale, vector.Y * scale, vector.Z * scale, vector.W * scale);
         }
 
         /// <summary>
@@ -628,7 +625,7 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Multiply(Vector4d vector, Vector4d scale)
+        public static Vector4 Multiply(Vector4 vector, Vector4 scale)
         {
             Multiply(ref vector, ref scale, out vector);
             return vector;
@@ -640,9 +637,9 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Multiply(ref Vector4d vector, ref Vector4d scale, out Vector4d result)
+        public static void Multiply(ref Vector4 vector, ref Vector4 scale, out Vector4 result)
         {
-            result = new Vector4d(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z, vector.W * scale.W);
+            result = new Vector4(vector.X * scale.X, vector.Y * scale.Y, vector.Z * scale.Z, vector.W * scale.W);
         }
 
         #endregion
@@ -655,7 +652,7 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Divide(Vector4d vector, double scale)
+        public static Vector4 Divide(Vector4 vector, float scale)
         {
             Divide(ref vector, scale, out vector);
             return vector;
@@ -667,7 +664,7 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Divide(ref Vector4d vector, double scale, out Vector4d result)
+        public static void Divide(ref Vector4 vector, float scale, out Vector4 result)
         {
             Multiply(ref vector, 1 / scale, out result);
         }
@@ -678,7 +675,7 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <returns>Result of the operation.</returns>
-        public static Vector4d Divide(Vector4d vector, Vector4d scale)
+        public static Vector4 Divide(Vector4 vector, Vector4 scale)
         {
             Divide(ref vector, ref scale, out vector);
             return vector;
@@ -690,9 +687,9 @@ namespace OpenTK
         /// <param name="vector">Left operand.</param>
         /// <param name="scale">Right operand.</param>
         /// <param name="result">Result of the operation.</param>
-        public static void Divide(ref Vector4d vector, ref Vector4d scale, out Vector4d result)
+        public static void Divide(ref Vector4 vector, ref Vector4 scale, out Vector4 result)
         {
-            result = new Vector4d(vector.X / scale.X, vector.Y / scale.Y, vector.Z / scale.Z, vector.W / scale.W);
+            result = new Vector4(vector.X / scale.X, vector.Y / scale.Y, vector.Z / scale.Z, vector.W / scale.W);
         }
 
         #endregion
@@ -705,7 +702,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>The component-wise minimum</returns>
-        public static Vector4d Min(Vector4d a, Vector4d b)
+        public static Vector4 Min(Vector4 a, Vector4 b)
         {
             a.X = a.X < b.X ? a.X : b.X;
             a.Y = a.Y < b.Y ? a.Y : b.Y;
@@ -720,7 +717,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">The component-wise minimum</param>
-        public static void Min(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Min(ref Vector4 a, ref Vector4 b, out Vector4 result)
         {
             result.X = a.X < b.X ? a.X : b.X;
             result.Y = a.Y < b.Y ? a.Y : b.Y;
@@ -738,7 +735,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <returns>The component-wise maximum</returns>
-        public static Vector4d Max(Vector4d a, Vector4d b)
+        public static Vector4 Max(Vector4 a, Vector4 b)
         {
             a.X = a.X > b.X ? a.X : b.X;
             a.Y = a.Y > b.Y ? a.Y : b.Y;
@@ -753,7 +750,7 @@ namespace OpenTK
         /// <param name="a">First operand</param>
         /// <param name="b">Second operand</param>
         /// <param name="result">The component-wise maximum</param>
-        public static void Max(ref Vector4d a, ref Vector4d b, out Vector4d result)
+        public static void Max(ref Vector4 a, ref Vector4 b, out Vector4 result)
         {
             result.X = a.X > b.X ? a.X : b.X;
             result.Y = a.Y > b.Y ? a.Y : b.Y;
@@ -772,7 +769,7 @@ namespace OpenTK
         /// <param name="min">Minimum vector</param>
         /// <param name="max">Maximum vector</param>
         /// <returns>The clamped vector</returns>
-        public static Vector4d Clamp(Vector4d vec, Vector4d min, Vector4d max)
+        public static Vector4 Clamp(Vector4 vec, Vector4 min, Vector4 max)
         {
             vec.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
             vec.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
@@ -788,7 +785,7 @@ namespace OpenTK
         /// <param name="min">Minimum vector</param>
         /// <param name="max">Maximum vector</param>
         /// <param name="result">The clamped vector</param>
-        public static void Clamp(ref Vector4d vec, ref Vector4d min, ref Vector4d max, out Vector4d result)
+        public static void Clamp(ref Vector4 vec, ref Vector4 min, ref Vector4 max, out Vector4 result)
         {
             result.X = vec.X < min.X ? min.X : vec.X > max.X ? max.X : vec.X;
             result.Y = vec.Y < min.Y ? min.Y : vec.Y > max.Y ? max.Y : vec.Y;
@@ -805,9 +802,9 @@ namespace OpenTK
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <returns>The normalized vector</returns>
-        public static Vector4d Normalize(Vector4d vec)
+        public static Vector4 Normalize(Vector4 vec)
         {
-            double scale = 1.0 / vec.Length;
+            float scale = 1.0f / vec.Length;
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
@@ -820,9 +817,9 @@ namespace OpenTK
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <param name="result">The normalized vector</param>
-        public static void Normalize(ref Vector4d vec, out Vector4d result)
+        public static void Normalize(ref Vector4 vec, out Vector4 result)
         {
-            double scale = 1.0 / vec.Length;
+            float scale = 1.0f / vec.Length;
             result.X = vec.X * scale;
             result.Y = vec.Y * scale;
             result.Z = vec.Z * scale;
@@ -838,9 +835,9 @@ namespace OpenTK
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <returns>The normalized vector</returns>
-        public static Vector4d NormalizeFast(Vector4d vec)
+        public static Vector4 NormalizeFast(Vector4 vec)
         {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
             vec.X *= scale;
             vec.Y *= scale;
             vec.Z *= scale;
@@ -853,9 +850,9 @@ namespace OpenTK
         /// </summary>
         /// <param name="vec">The input vector</param>
         /// <param name="result">The normalized vector</param>
-        public static void NormalizeFast(ref Vector4d vec, out Vector4d result)
+        public static void NormalizeFast(ref Vector4 vec, out Vector4 result)
         {
-            double scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
+            float scale = MathHelper.InverseSqrtFast(vec.X * vec.X + vec.Y * vec.Y + vec.Z * vec.Z + vec.W * vec.W);
             result.X = vec.X * scale;
             result.Y = vec.Y * scale;
             result.Z = vec.Z * scale;
@@ -872,7 +869,7 @@ namespace OpenTK
         /// <param name="left">First operand</param>
         /// <param name="right">Second operand</param>
         /// <returns>The dot product of the two inputs</returns>
-        public static double Dot(Vector4d left, Vector4d right)
+        public static float Dot(Vector4 left, Vector4 right)
         {
             return left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
         }
@@ -883,7 +880,7 @@ namespace OpenTK
         /// <param name="left">First operand</param>
         /// <param name="right">Second operand</param>
         /// <param name="result">The dot product of the two inputs</param>
-        public static void Dot(ref Vector4d left, ref Vector4d right, out double result)
+        public static void Dot(ref Vector4 left, ref Vector4 right, out float result)
         {
             result = left.X * right.X + left.Y * right.Y + left.Z * right.Z + left.W * right.W;
         }
@@ -899,7 +896,7 @@ namespace OpenTK
         /// <param name="b">Second input vector</param>
         /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
         /// <returns>a when blend=0, b when blend=1, and a linear combination otherwise</returns>
-        public static Vector4d Lerp(Vector4d a, Vector4d b, double blend)
+        public static Vector4 Lerp(Vector4 a, Vector4 b, float blend)
         {
             a.X = blend * (b.X - a.X) + a.X;
             a.Y = blend * (b.Y - a.Y) + a.Y;
@@ -915,7 +912,7 @@ namespace OpenTK
         /// <param name="b">Second input vector</param>
         /// <param name="blend">The blend factor. a when blend=0, b when blend=1.</param>
         /// <param name="result">a when blend=0, b when blend=1, and a linear combination otherwise</param>
-        public static void Lerp(ref Vector4d a, ref Vector4d b, double blend, out Vector4d result)
+        public static void Lerp(ref Vector4 a, ref Vector4 b, float blend, out Vector4 result)
         {
             result.X = blend * (b.X - a.X) + a.X;
             result.Y = blend * (b.Y - a.Y) + a.Y;
@@ -936,7 +933,7 @@ namespace OpenTK
         /// <param name="u">First Barycentric Coordinate</param>
         /// <param name="v">Second Barycentric Coordinate</param>
         /// <returns>a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</returns>
-        public static Vector4d BaryCentric(Vector4d a, Vector4d b, Vector4d c, double u, double v)
+        public static Vector4 BaryCentric(Vector4 a, Vector4 b, Vector4 c, float u, float v)
         {
             return a + u * (b - a) + v * (c - a);
         }
@@ -948,11 +945,11 @@ namespace OpenTK
         /// <param name="u">First Barycentric Coordinate.</param>
         /// <param name="v">Second Barycentric Coordinate.</param>
         /// <param name="result">Output Vector. a when u=v=0, b when u=1,v=0, c when u=0,v=1, and a linear combination of a,b,c otherwise</param>
-        public static void BaryCentric(ref Vector4d a, ref Vector4d b, ref Vector4d c, double u, double v, out Vector4d result)
+        public static void BaryCentric(ref Vector4 a, ref Vector4 b, ref Vector4 c, float u, float v, out Vector4 result)
         {
             result = a; // copy
 
-            Vector4d temp = b; // copy
+            Vector4 temp = b; // copy
             Subtract(ref temp, ref a, out temp);
             Multiply(ref temp, u, out temp);
             Add(ref result, ref temp, out result);
@@ -971,9 +968,9 @@ namespace OpenTK
         /// <param name="vec">The vector to transform</param>
         /// <param name="mat">The desired transformation</param>
         /// <returns>The transformed vector</returns>
-        public static Vector4d Transform(Vector4d vec, Matrix4d mat)
+        public static Vector4 Transform(Vector4 vec, Matrix4 mat)
         {
-            Vector4d result;
+            Vector4 result;
             Transform(ref vec, ref mat, out result);
             return result;
         }
@@ -982,9 +979,9 @@ namespace OpenTK
         /// <param name="vec">The vector to transform</param>
         /// <param name="mat">The desired transformation</param>
         /// <param name="result">The transformed vector</param>
-        public static void Transform(ref Vector4d vec, ref Matrix4d mat, out Vector4d result)
+        public static void Transform(ref Vector4 vec, ref Matrix4 mat, out Vector4 result)
         {
-            result = new Vector4d(
+            result = new Vector4(
                 vec.X * mat.Row0.X + vec.Y * mat.Row1.X + vec.Z * mat.Row2.X + vec.W * mat.Row3.X,
                 vec.X * mat.Row0.Y + vec.Y * mat.Row1.Y + vec.Z * mat.Row2.Y + vec.W * mat.Row3.Y,
                 vec.X * mat.Row0.Z + vec.Y * mat.Row1.Z + vec.Z * mat.Row2.Z + vec.W * mat.Row3.Z,
@@ -997,9 +994,9 @@ namespace OpenTK
         /// <param name="vec">The vector to transform.</param>
         /// <param name="quat">The quaternion to rotate the vector by.</param>
         /// <returns>The result of the operation.</returns>
-        public static Vector4d Transform(Vector4d vec, Quaterniond quat)
+        public static Vector4 Transform(Vector4 vec, Quaternion quat)
         {
-            Vector4d result;
+            Vector4 result;
             Transform(ref vec, ref quat, out result);
             return result;
         }
@@ -1010,14 +1007,14 @@ namespace OpenTK
         /// <param name="vec">The vector to transform.</param>
         /// <param name="quat">The quaternion to rotate the vector by.</param>
         /// <param name="result">The result of the operation.</param>
-        public static void Transform(ref Vector4d vec, ref Quaterniond quat, out Vector4d result)
+        public static void Transform(ref Vector4 vec, ref Quaternion quat, out Vector4 result)
         {
-            Quaterniond v = new Quaterniond(vec.X, vec.Y, vec.Z, vec.W), i, t;
-            Quaterniond.Invert(ref quat, out i);
-            Quaterniond.Multiply(ref quat, ref v, out t);
-            Quaterniond.Multiply(ref t, ref i, out v);
+            Quaternion v = new Quaternion(vec.X, vec.Y, vec.Z, vec.W), i, t;
+            Quaternion.Invert(ref quat, out i);
+            Quaternion.Multiply(ref quat, ref v, out t);
+            Quaternion.Multiply(ref t, ref i, out v);
 
-            result = new Vector4d(v.X, v.Y, v.Z, v.W);
+            result = new Vector4(v.X, v.Y, v.Z, v.W);
         }
 
         #endregion
@@ -1029,390 +1026,390 @@ namespace OpenTK
         #region 2-component
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the X and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the X and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Xy { get { return new Vector2d(X, Y); } set { X = value.X; Y = value.Y; } }
+        public Vector2 Xy { get { return new Vector2(X, Y); } set { X = value.X; Y = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the X and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the X and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Xz { get { return new Vector2d(X, Z); } set { X = value.X; Z = value.Y; } }
+        public Vector2 Xz { get { return new Vector2(X, Z); } set { X = value.X; Z = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the X and W components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the X and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Xw { get { return new Vector2d(X, W); } set { X = value.X; W = value.Y; } }
+        public Vector2 Xw { get { return new Vector2(X, W); } set { X = value.X; W = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the Y and X components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the Y and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Yx { get { return new Vector2d(Y, X); } set { Y = value.X; X = value.Y; } }
+        public Vector2 Yx { get { return new Vector2(Y, X); } set { Y = value.X; X = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the Y and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the Y and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Yz { get { return new Vector2d(Y, Z); } set { Y = value.X; Z = value.Y; } }
+        public Vector2 Yz { get { return new Vector2(Y, Z); } set { Y = value.X; Z = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the Y and W components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the Y and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Yw { get { return new Vector2d(Y, W); } set { Y = value.X; W = value.Y; } }
+        public Vector2 Yw { get { return new Vector2(Y, W); } set { Y = value.X; W = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the Z and X components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the Z and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Zx { get { return new Vector2d(Z, X); } set { Z = value.X; X = value.Y; } }
+        public Vector2 Zx { get { return new Vector2(Z, X); } set { Z = value.X; X = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the Z and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the Z and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Zy { get { return new Vector2d(Z, Y); } set { Z = value.X; Y = value.Y; } }
+        public Vector2 Zy { get { return new Vector2(Z, Y); } set { Z = value.X; Y = value.Y; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector2d with the Z and W components of this instance.
+        /// Gets an OpenTK.Vector2 with the Z and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Zw { get { return new Vector2d(Z, W); } set { Z = value.X; W = value.Y; } }
+        public Vector2 Zw { get { return new Vector2(Z, W); } set { Z = value.X; W = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the W and X components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the W and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Wx { get { return new Vector2d(W, X); } set { W = value.X; X = value.Y; } }
+        public Vector2 Wx { get { return new Vector2(W, X); } set { W = value.X; X = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the W and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the W and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Wy { get { return new Vector2d(W, Y); } set { W = value.X; Y = value.Y; } }
+        public Vector2 Wy { get { return new Vector2(W, Y); } set { W = value.X; Y = value.Y; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector2d with the W and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector2 with the W and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector2d Wz { get { return new Vector2d(W, Z); } set { W = value.X; Z = value.Y; } }
+        public Vector2 Wz { get { return new Vector2(W, Z); } set { W = value.X; Z = value.Y; } }
 
         #endregion
 
         #region 3-component
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xyz { get { return new Vector3d(X, Y, Z); } set { X = value.X; Y = value.Y; Z = value.Z; } }
+        public Vector3 Xyz { get { return new Vector3(X, Y, Z); } set { X = value.X; Y = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xyw { get { return new Vector3d(X, Y, W); } set { X = value.X; Y = value.Y; W = value.Z; } }
+        public Vector3 Xyw { get { return new Vector3(X, Y, W); } set { X = value.X; Y = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, Z, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, Z, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xzy { get { return new Vector3d(X, Z, Y); } set { X = value.X; Z = value.Y; Y = value.Z; } }
+        public Vector3 Xzy { get { return new Vector3(X, Z, Y); } set { X = value.X; Z = value.Y; Y = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, Z, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, Z, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xzw { get { return new Vector3d(X, Z, W); } set { X = value.X; Z = value.Y; W = value.Z; } }
+        public Vector3 Xzw { get { return new Vector3(X, Z, W); } set { X = value.X; Z = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, W, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, W, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xwy { get { return new Vector3d(X, W, Y); } set { X = value.X; W = value.Y; Y = value.Z; } }
+        public Vector3 Xwy { get { return new Vector3(X, W, Y); } set { X = value.X; W = value.Y; Y = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the X, W, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the X, W, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Xwz { get { return new Vector3d(X, W, Z); } set { X = value.X; W = value.Y; Z = value.Z; } }
+        public Vector3 Xwz { get { return new Vector3(X, W, Z); } set { X = value.X; W = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Y, X, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Y, X, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Yxz { get { return new Vector3d(Y, X, Z); } set { Y = value.X; X = value.Y; Z = value.Z; } }
+        public Vector3 Yxz { get { return new Vector3(Y, X, Z); } set { Y = value.X; X = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Y, X, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Y, X, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Yxw { get { return new Vector3d(Y, X, W); } set { Y = value.X; X = value.Y; W = value.Z; } }
+        public Vector3 Yxw { get { return new Vector3(Y, X, W); } set { Y = value.X; X = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Y, Z, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Y, Z, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Yzx { get { return new Vector3d(Y, Z, X); } set { Y = value.X; Z = value.Y; X = value.Z; } }
+        public Vector3 Yzx { get { return new Vector3(Y, Z, X); } set { Y = value.X; Z = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Y, Z, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Y, Z, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Yzw { get { return new Vector3d(Y, Z, W); } set { Y = value.X; Z = value.Y; W = value.Z; } }
+        public Vector3 Yzw { get { return new Vector3(Y, Z, W); } set { Y = value.X; Z = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Y, W, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Y, W, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Ywx { get { return new Vector3d(Y, W, X); } set { Y = value.X; W = value.Y; X = value.Z; } }
+        public Vector3 Ywx { get { return new Vector3(Y, W, X); } set { Y = value.X; W = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector3d with the Y, W, and Z components of this instance.
+        /// Gets an OpenTK.Vector3 with the Y, W, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Ywz { get { return new Vector3d(Y, W, Z); } set { Y = value.X; W = value.Y; Z = value.Z; } }
+        public Vector3 Ywz { get { return new Vector3(Y, W, Z); } set { Y = value.X; W = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, X, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, X, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zxy { get { return new Vector3d(Z, X, Y); } set { Z = value.X; X = value.Y; Y = value.Z; } }
+        public Vector3 Zxy { get { return new Vector3(Z, X, Y); } set { Z = value.X; X = value.Y; Y = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, X, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, X, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zxw { get { return new Vector3d(Z, X, W); } set { Z = value.X; X = value.Y; W = value.Z; } }
+        public Vector3 Zxw { get { return new Vector3(Z, X, W); } set { Z = value.X; X = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, Y, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, Y, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zyx { get { return new Vector3d(Z, Y, X); } set { Z = value.X; Y = value.Y; X = value.Z; } }
+        public Vector3 Zyx { get { return new Vector3(Z, Y, X); } set { Z = value.X; Y = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, Y, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, Y, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zyw { get { return new Vector3d(Z, Y, W); } set { Z = value.X; Y = value.Y; W = value.Z; } }
+        public Vector3 Zyw { get { return new Vector3(Z, Y, W); } set { Z = value.X; Y = value.Y; W = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, W, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, W, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zwx { get { return new Vector3d(Z, W, X); } set { Z = value.X; W = value.Y; X = value.Z; } }
+        public Vector3 Zwx { get { return new Vector3(Z, W, X); } set { Z = value.X; W = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the Z, W, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the Z, W, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Zwy { get { return new Vector3d(Z, W, Y); } set { Z = value.X; W = value.Y; Y = value.Z; } }
+        public Vector3 Zwy { get { return new Vector3(Z, W, Y); } set { Z = value.X; W = value.Y; Y = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, X, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, X, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wxy { get { return new Vector3d(W, X, Y); } set { W = value.X; X = value.Y; Y = value.Z; } }
+        public Vector3 Wxy { get { return new Vector3(W, X, Y); } set { W = value.X; X = value.Y; Y = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, X, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, X, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wxz { get { return new Vector3d(W, X, Z); } set { W = value.X; X = value.Y; Z = value.Z; } }
+        public Vector3 Wxz { get { return new Vector3(W, X, Z); } set { W = value.X; X = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, Y, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, Y, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wyx { get { return new Vector3d(W, Y, X); } set { W = value.X; Y = value.Y; X = value.Z; } }
+        public Vector3 Wyx { get { return new Vector3(W, Y, X); } set { W = value.X; Y = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wyz { get { return new Vector3d(W, Y, Z); } set { W = value.X; Y = value.Y; Z = value.Z; } }
+        public Vector3 Wyz { get { return new Vector3(W, Y, Z); } set { W = value.X; Y = value.Y; Z = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, Z, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, Z, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wzx { get { return new Vector3d(W, Z, X); } set { W = value.X; Z = value.Y; X = value.Z; } }
+        public Vector3 Wzx { get { return new Vector3(W, Z, X); } set { W = value.X; Z = value.Y; X = value.Z; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector3d with the W, Z, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector3 with the W, Z, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector3d Wzy { get { return new Vector3d(W, Z, Y); } set { W = value.X; Z = value.Y; Y = value.Z; } }
+        public Vector3 Wzy { get { return new Vector3(W, Z, Y); } set { W = value.X; Z = value.Y; Y = value.Z; } }
 
         #endregion
 
         #region 4-component
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the X, Y, W, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the X, Y, W, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Xywz { get { return new Vector4d(X, Y, W, Z); } set { X = value.X; Y = value.Y; W = value.Z; Z = value.W; } }
+        public Vector4 Xywz { get { return new Vector4(X, Y, W, Z); } set { X = value.X; Y = value.Y; W = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the X, Z, Y, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the X, Z, Y, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Xzyw { get { return new Vector4d(X, Z, Y, W); } set { X = value.X; Z = value.Y; Y = value.Z; W = value.W; } }
+        public Vector4 Xzyw { get { return new Vector4(X, Z, Y, W); } set { X = value.X; Z = value.Y; Y = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the X, Z, W, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the X, Z, W, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Xzwy { get { return new Vector4d(X, Z, W, Y); } set { X = value.X; Z = value.Y; W = value.Z; Y = value.W; } }
+        public Vector4 Xzwy { get { return new Vector4(X, Z, W, Y); } set { X = value.X; Z = value.Y; W = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the X, W, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the X, W, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Xwyz { get { return new Vector4d(X, W, Y, Z); } set { X = value.X; W = value.Y; Y = value.Z; Z = value.W; } }
+        public Vector4 Xwyz { get { return new Vector4(X, W, Y, Z); } set { X = value.X; W = value.Y; Y = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the X, W, Z, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the X, W, Z, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Xwzy { get { return new Vector4d(X, W, Z, Y); } set { X = value.X; W = value.Y; Z = value.Z; Y = value.W; } }
+        public Vector4 Xwzy { get { return new Vector4(X, W, Z, Y); } set { X = value.X; W = value.Y; Z = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, X, Z, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, X, Z, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yxzw { get { return new Vector4d(Y, X, Z, W); } set { Y = value.X; X = value.Y; Z = value.Z; W = value.W; } }
+        public Vector4 Yxzw { get { return new Vector4(Y, X, Z, W); } set { Y = value.X; X = value.Y; Z = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, X, W, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, X, W, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yxwz { get { return new Vector4d(Y, X, W, Z); } set { Y = value.X; X = value.Y; W = value.Z; Z = value.W; } }
+        public Vector4 Yxwz { get { return new Vector4(Y, X, W, Z); } set { Y = value.X; X = value.Y; W = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector4d with the Y, Y, Z, and W components of this instance.
+        /// Gets an OpenTK.Vector4 with the Y, Y, Z, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yyzw { get { return new Vector4d(Y, Y, Z, W); } set { X = value.X; Y = value.Y; Z = value.Z; W = value.W; } }
+        public Vector4 Yyzw { get { return new Vector4(Y, Y, Z, W); } set { X = value.X; Y = value.Y; Z = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector4d with the Y, Y, W, and Z components of this instance.
+        /// Gets an OpenTK.Vector4 with the Y, Y, W, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yywz { get { return new Vector4d(Y, Y, W, Z); } set { X = value.X; Y = value.Y; W = value.Z; Z = value.W; } }
+        public Vector4 Yywz { get { return new Vector4(Y, Y, W, Z); } set { X = value.X; Y = value.Y; W = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, Z, X, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, Z, X, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yzxw { get { return new Vector4d(Y, Z, X, W); } set { Y = value.X; Z = value.Y; X = value.Z; W = value.W; } }
+        public Vector4 Yzxw { get { return new Vector4(Y, Z, X, W); } set { Y = value.X; Z = value.Y; X = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, Z, W, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, Z, W, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Yzwx { get { return new Vector4d(Y, Z, W, X); } set { Y = value.X; Z = value.Y; W = value.Z; X = value.W; } }
+        public Vector4 Yzwx { get { return new Vector4(Y, Z, W, X); } set { Y = value.X; Z = value.Y; W = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, W, X, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, W, X, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Ywxz { get { return new Vector4d(Y, W, X, Z); } set { Y = value.X; W = value.Y; X = value.Z; Z = value.W; } }
+        public Vector4 Ywxz { get { return new Vector4(Y, W, X, Z); } set { Y = value.X; W = value.Y; X = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Y, W, Z, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Y, W, Z, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Ywzx { get { return new Vector4d(Y, W, Z, X); } set { Y = value.X; W = value.Y; Z = value.Z; X = value.W; } }
+        public Vector4 Ywzx { get { return new Vector4(Y, W, Z, X); } set { Y = value.X; W = value.Y; Z = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, X, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, X, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zxyw { get { return new Vector4d(Z, X, Y, W); } set { Z = value.X; X = value.Y; Y = value.Z; W = value.W; } }
+        public Vector4 Zxyw { get { return new Vector4(Z, X, Y, W); } set { Z = value.X; X = value.Y; Y = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, X, W, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, X, W, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zxwy { get { return new Vector4d(Z, X, W, Y); } set { Z = value.X; X = value.Y; W = value.Z; Y = value.W; } }
+        public Vector4 Zxwy { get { return new Vector4(Z, X, W, Y); } set { Z = value.X; X = value.Y; W = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, Y, X, and W components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, Y, X, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zyxw { get { return new Vector4d(Z, Y, X, W); } set { Z = value.X; Y = value.Y; X = value.Z; W = value.W; } }
+        public Vector4 Zyxw { get { return new Vector4(Z, Y, X, W); } set { Z = value.X; Y = value.Y; X = value.Z; W = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, Y, W, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, Y, W, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zywx { get { return new Vector4d(Z, Y, W, X); } set { Z = value.X; Y = value.Y; W = value.Z; X = value.W; } }
+        public Vector4 Zywx { get { return new Vector4(Z, Y, W, X); } set { Z = value.X; Y = value.Y; W = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, W, X, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, W, X, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zwxy { get { return new Vector4d(Z, W, X, Y); } set { Z = value.X; W = value.Y; X = value.Z; Y = value.W; } }
+        public Vector4 Zwxy { get { return new Vector4(Z, W, X, Y); } set { Z = value.X; W = value.Y; X = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the Z, W, Y, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the Z, W, Y, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zwyx { get { return new Vector4d(Z, W, Y, X); } set { Z = value.X; W = value.Y; Y = value.Z; X = value.W; } }
+        public Vector4 Zwyx { get { return new Vector4(Z, W, Y, X); } set { Z = value.X; W = value.Y; Y = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector4d with the Z, W, Z, and Y components of this instance.
+        /// Gets an OpenTK.Vector4 with the Z, W, Z, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Zwzy { get { return new Vector4d(Z, W, Z, Y); } set { X = value.X; W = value.Y; Z = value.Z; Y = value.W; } }
+        public Vector4 Zwzy { get { return new Vector4(Z, W, Z, Y); } set { X = value.X; W = value.Y; Z = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, X, Y, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, X, Y, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wxyz { get { return new Vector4d(W, X, Y, Z); } set { W = value.X; X = value.Y; Y = value.Z; Z = value.W; } }
+        public Vector4 Wxyz { get { return new Vector4(W, X, Y, Z); } set { W = value.X; X = value.Y; Y = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, X, Z, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, X, Z, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wxzy { get { return new Vector4d(W, X, Z, Y); } set { W = value.X; X = value.Y; Z = value.Z; Y = value.W; } }
+        public Vector4 Wxzy { get { return new Vector4(W, X, Z, Y); } set { W = value.X; X = value.Y; Z = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, Y, X, and Z components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, Y, X, and Z components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wyxz { get { return new Vector4d(W, Y, X, Z); } set { W = value.X; Y = value.Y; X = value.Z; Z = value.W; } }
+        public Vector4 Wyxz { get { return new Vector4(W, Y, X, Z); } set { W = value.X; Y = value.Y; X = value.Z; Z = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, Y, Z, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, Y, Z, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wyzx { get { return new Vector4d(W, Y, Z, X); } set { W = value.X; Y = value.Y; Z = value.Z; X = value.W; } }
+        public Vector4 Wyzx { get { return new Vector4(W, Y, Z, X); } set { W = value.X; Y = value.Y; Z = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, Z, X, and Y components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, Z, X, and Y components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wzxy { get { return new Vector4d(W, Z, X, Y); } set { W = value.X; Z = value.Y; X = value.Z; Y = value.W; } }
+        public Vector4 Wzxy { get { return new Vector4(W, Z, X, Y); } set { W = value.X; Z = value.Y; X = value.Z; Y = value.W; } }
 
         /// <summary>
-        /// Gets or sets an OpenTK.Vector4d with the W, Z, Y, and X components of this instance.
+        /// Gets or sets an OpenTK.Vector4 with the W, Z, Y, and X components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wzyx { get { return new Vector4d(W, Z, Y, X); } set { W = value.X; Z = value.Y; Y = value.Z; X = value.W; } }
+        public Vector4 Wzyx { get { return new Vector4(W, Z, Y, X); } set { W = value.X; Z = value.Y; Y = value.Z; X = value.W; } }
 
         /// <summary>
-        /// Gets an OpenTK.Vector4d with the W, Z, Y, and W components of this instance.
+        /// Gets an OpenTK.Vector4 with the W, Z, Y, and W components of this instance.
         /// </summary>
         [XmlIgnore]
-        public Vector4d Wzyw { get { return new Vector4d(W, Z, Y, W); } set { X = value.X; Z = value.Y; Y = value.Z; W = value.W; } }
+        public Vector4 Wzyw { get { return new Vector4(W, Z, Y, W); } set { X = value.X; Z = value.Y; Y = value.Z; W = value.W; } }
 
         #endregion
 
@@ -1426,7 +1423,7 @@ namespace OpenTK
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator +(Vector4d left, Vector4d right)
+        public static Vector4 operator +(Vector4 left, Vector4 right)
         {
             left.X += right.X;
             left.Y += right.Y;
@@ -1441,7 +1438,7 @@ namespace OpenTK
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator -(Vector4d left, Vector4d right)
+        public static Vector4 operator -(Vector4 left, Vector4 right)
         {
             left.X -= right.X;
             left.Y -= right.Y;
@@ -1455,7 +1452,7 @@ namespace OpenTK
         /// </summary>
         /// <param name="vec">The instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator -(Vector4d vec)
+        public static Vector4 operator -(Vector4 vec)
         {
             vec.X = -vec.X;
             vec.Y = -vec.Y;
@@ -1470,7 +1467,7 @@ namespace OpenTK
         /// <param name="vec">The instance.</param>
         /// <param name="scale">The scalar.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator *(Vector4d vec, double scale)
+        public static Vector4 operator *(Vector4 vec, float scale)
         {
             vec.X *= scale;
             vec.Y *= scale;
@@ -1485,7 +1482,7 @@ namespace OpenTK
         /// <param name="scale">The scalar.</param>
         /// <param name="vec">The instance.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator *(double scale, Vector4d vec)
+        public static Vector4 operator *(float scale, Vector4 vec)
         {
             vec.X *= scale;
             vec.Y *= scale;
@@ -1500,7 +1497,7 @@ namespace OpenTK
         /// <param name="scale">Left operand.</param>
         /// <param name="vec">Right operand.</param>
         /// <returns>Result of multiplication.</returns>
-        public static Vector4d operator *(Vector4d vec, Vector4d scale)
+        public static Vector4 operator *(Vector4 vec, Vector4 scale)
         {
             vec.X *= scale.X;
             vec.Y *= scale.Y;
@@ -1508,16 +1505,16 @@ namespace OpenTK
             vec.W *= scale.W;
             return vec;
         }
-
+		
         /// <summary>
         /// Divides an instance by a scalar.
         /// </summary>
         /// <param name="vec">The instance.</param>
         /// <param name="scale">The scalar.</param>
         /// <returns>The result of the calculation.</returns>
-        public static Vector4d operator /(Vector4d vec, double scale)
+        public static Vector4 operator /(Vector4 vec, float scale)
         {
-            double mult = 1 / scale;
+            float mult = 1.0f / scale;
             vec.X *= mult;
             vec.Y *= mult;
             vec.Z *= mult;
@@ -1531,7 +1528,7 @@ namespace OpenTK
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>True, if left equals right; false otherwise.</returns>
-        public static bool operator ==(Vector4d left, Vector4d right)
+        public static bool operator ==(Vector4 left, Vector4 right)
         {
             return left.Equals(right);
         }
@@ -1542,7 +1539,7 @@ namespace OpenTK
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>True, if left does not equa lright; false otherwise.</returns>
-        public static bool operator !=(Vector4d left, Vector4d right)
+        public static bool operator !=(Vector4 left, Vector4 right)
         {
             return !left.Equals(right);
         }
@@ -1553,7 +1550,7 @@ namespace OpenTK
         /// <param name="v">The instance.</param>
         /// <returns>A pointer to the first element of v.</returns>
         [CLSCompliant(false)]
-        unsafe public static explicit operator double*(Vector4d v)
+        unsafe public static explicit operator float*(Vector4 v)
         {
             return &v.X;
         }
@@ -1563,28 +1560,12 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">The instance.</param>
         /// <returns>A pointer to the first element of v.</returns>
-        public static explicit operator IntPtr(Vector4d v)
+        public static explicit operator IntPtr(Vector4 v)
         {
             unsafe
             {
                 return (IntPtr)(&v.X);
             }
-        }
-
-        /// <summary>Converts OpenTK.Vector4 to OpenTK.Vector4d.</summary>
-        /// <param name="v4">The Vector4 to convert.</param>
-        /// <returns>The resulting Vector4d.</returns>
-        public static explicit operator Vector4d(Vector4 v4)
-        {
-            return new Vector4d(v4.X, v4.Y, v4.Z, v4.W);
-        }
-
-        /// <summary>Converts OpenTK.Vector4d to OpenTK.Vector4.</summary>
-        /// <param name="v4d">The Vector4d to convert.</param>
-        /// <returns>The resulting Vector4.</returns>
-        public static explicit operator Vector4(Vector4d v4d)
-        {
-            return new Vector4((float)v4d.X, (float)v4d.Y, (float)v4d.Z, (float)v4d.W);
         }
 
         #endregion
@@ -1595,7 +1576,7 @@ namespace OpenTK
 
         private static string listSeparator = System.Globalization.CultureInfo.CurrentCulture.TextInfo.ListSeparator;
         /// <summary>
-        /// Returns a System.String that represents the current Vector4d.
+        /// Returns a System.String that represents the current Vector4.
         /// </summary>
         /// <returns></returns>
         public override string ToString()
@@ -1627,10 +1608,10 @@ namespace OpenTK
         /// <returns>True if the instances are equal; false otherwise.</returns>
         public override bool Equals(object obj)
         {
-            if (!(obj is Vector4d))
+            if (!(obj is Vector4))
                 return false;
 
-            return this.Equals((Vector4d)obj);
+            return this.Equals((Vector4)obj);
         }
 
         #endregion
@@ -1639,12 +1620,12 @@ namespace OpenTK
 
         #endregion
 
-        #region IEquatable<Vector4d> Members
+        #region IEquatable<Vector4> Members
 
         /// <summary>Indicates whether the current vector is equal to another vector.</summary>
         /// <param name="other">A vector to compare with this vector.</param>
         /// <returns>true if the current vector is equal to the vector parameter; otherwise, false.</returns>
-        public bool Equals(Vector4d other)
+        public bool Equals(Vector4 other)
         {
             return
                 X == other.X &&

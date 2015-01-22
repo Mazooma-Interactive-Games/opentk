@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{767ED049-581C-45FF-80A4-335827719124}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OpenTK.Math</RootNamespace>
+    <AssemblyName>OpenTK.Math</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile7</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>OpenTK.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- A reference to the entire .NET Framework is automatically included -->
+    <None Include="OpenTK.snk" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BezierCurve.cs" />
+    <Compile Include="BezierCurveCubic.cs" />
+    <Compile Include="BezierCurveQuadric.cs" />
+    <Compile Include="Box2.cs" />
+    <Compile Include="Functions.cs" />
+    <Compile Include="Half.cs" />
+    <Compile Include="MathHelper.cs" />
+    <Compile Include="Matrix2.cs" />
+    <Compile Include="Matrix2d.cs" />
+    <Compile Include="Matrix2x3.cs" />
+    <Compile Include="Matrix2x3d.cs" />
+    <Compile Include="Matrix2x4.cs" />
+    <Compile Include="Matrix2x4d.cs" />
+    <Compile Include="Matrix3.cs" />
+    <Compile Include="Matrix3d.cs" />
+    <Compile Include="Matrix3x2.cs" />
+    <Compile Include="Matrix3x2d.cs" />
+    <Compile Include="Matrix3x4.cs" />
+    <Compile Include="Matrix3x4d.cs" />
+    <Compile Include="Matrix4.cs" />
+    <Compile Include="Matrix4d.cs" />
+    <Compile Include="Matrix4x2.cs" />
+    <Compile Include="Matrix4x2d.cs" />
+    <Compile Include="Matrix4x3.cs" />
+    <Compile Include="Matrix4x3d.cs" />
+    <Compile Include="Point.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quaternion.cs" />
+    <Compile Include="Quaterniond.cs" />
+    <Compile Include="Rectangle.cs" />
+    <Compile Include="Size.cs" />
+    <Compile Include="Vector2.cs" />
+    <Compile Include="Vector2d.cs" />
+    <Compile Include="Vector2h.cs" />
+    <Compile Include="Vector3.cs" />
+    <Compile Include="Vector3d.cs" />
+    <Compile Include="Vector3h.cs" />
+    <Compile Include="Vector4.cs" />
+    <Compile Include="Vector4d.cs" />
+    <Compile Include="Vector4h.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

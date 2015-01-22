@@ -75,8 +75,8 @@ namespace OpenTK
     /// but must not lead to GL interruption or termination. Providing a denormalized number or negative zero to GL must yield
     /// predictable results.
     /// </remarks>
-    [Serializable, StructLayout(LayoutKind.Sequential)]
-    public struct Half : ISerializable, IComparable<Half>, IFormattable, IEquatable<Half>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct Half : IComparable<Half>, IFormattable, IEquatable<Half>
     {
         #region Internal Field
 
@@ -395,26 +395,6 @@ namespace OpenTK
         public static readonly Single Epsilon = 0.00097656f;
 
         #endregion Constants
-
-        #region ISerializable
-
-        /// <summary>Constructor used by ISerializable to deserialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public Half(SerializationInfo info, StreamingContext context)
-        {
-            this.bits = (ushort)info.GetValue("bits", typeof(ushort));
-        }
-
-        /// <summary>Used by ISerialize to serialize the object.</summary>
-        /// <param name="info"></param>
-        /// <param name="context"></param>
-        public void GetObjectData(SerializationInfo info, StreamingContext context)
-        {
-            info.AddValue("bits", this.bits);
-        }
-
-        #endregion ISerializable
 
         #region Binary dump
 
