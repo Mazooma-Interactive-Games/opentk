@@ -38,7 +38,7 @@
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugSymbols>true</DebugSymbols>
-    <DefineConstants>IPHONE;OPENGLES;OPENTK_1;OPENTK_1_1</DefineConstants>
+    <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;IPHONE;OPENGLES;OPENTK_1;OPENTK_1_1;XAMCORE_2_0</DefineConstants>
     <DocumentationFile>..\..\..\Binaries\iOS\Release\OpenTK.1.1.xml</DocumentationFile>
     <CustomCommands>
       <CustomCommands>
@@ -46,8 +46,13 @@
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>Always</RunPostBuildEvent>
+  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Xamarin.iOS" />
+    <Reference Include="Xamarin.iOS">
+      <Aliases>libXam</Aliases>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
   </ItemGroup>
@@ -418,123 +423,6 @@
     <Compile Include="..\..\..\Source\OpenTK\Input\MouseState.cs">
       <Link>OpenTK\Input\MouseState.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\BezierCurve.cs">
-      <Link>OpenTK\Math\BezierCurve.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\BezierCurveCubic.cs">
-      <Link>OpenTK\Math\BezierCurveCubic.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\BezierCurveQuadric.cs">
-      <Link>OpenTK\Math\BezierCurveQuadric.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Box2.cs">
-      <Link>OpenTK\Math\Box2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Functions.cs">
-      <Link>OpenTK\Math\Functions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Half.cs">
-      <Link>OpenTK\Math\Half.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\MathHelper.cs">
-      <Link>OpenTK\Math\MathHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2.cs">
-      <Link>OpenTK\Math\Matrix2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2d.cs">
-      <Link>OpenTK\Math\Matrix2d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2x3.cs">
-      <Link>OpenTK\Math\Matrix2x3.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2x3d.cs">
-      <Link>OpenTK\Math\Matrix2x3d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2x4.cs">
-      <Link>OpenTK\Math\Matrix2x4.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix2x4d.cs">
-      <Link>OpenTK\Math\Matrix2x4d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3.cs">
-      <Link>OpenTK\Math\Matrix3.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3d.cs">
-      <Link>OpenTK\Math\Matrix3d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3x2.cs">
-      <Link>OpenTK\Math\Matrix3x2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3x2d.cs">
-      <Link>OpenTK\Math\Matrix3x2d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3x4.cs">
-      <Link>OpenTK\Math\Matrix3x4.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix3x4d.cs">
-      <Link>OpenTK\Math\Matrix3x4d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4.cs">
-      <Link>OpenTK\Math\Matrix4.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4d.cs">
-      <Link>OpenTK\Math\Matrix4d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4x2.cs">
-      <Link>OpenTK\Math\Matrix4x2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4x2d.cs">
-      <Link>OpenTK\Math\Matrix4x2d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4x3.cs">
-      <Link>OpenTK\Math\Matrix4x3.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Matrix4x3d.cs">
-      <Link>OpenTK\Math\Matrix4x3d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Point.cs">
-      <Link>OpenTK\Math\Point.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Quaternion.cs">
-      <Link>OpenTK\Math\Quaternion.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Quaterniond.cs">
-      <Link>OpenTK\Math\Quaterniond.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Rectangle.cs">
-      <Link>OpenTK\Math\Rectangle.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Size.cs">
-      <Link>OpenTK\Math\Size.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector2.cs">
-      <Link>OpenTK\Math\Vector2.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector2d.cs">
-      <Link>OpenTK\Math\Vector2d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector2h.cs">
-      <Link>OpenTK\Math\Vector2h.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector3.cs">
-      <Link>OpenTK\Math\Vector3.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector3d.cs">
-      <Link>OpenTK\Math\Vector3d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector3h.cs">
-      <Link>OpenTK\Math\Vector3h.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector4.cs">
-      <Link>OpenTK\Math\Vector4.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector4d.cs">
-      <Link>OpenTK\Math\Vector4d.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\Source\OpenTK\Math\Vector4h.cs">
-      <Link>OpenTK\Math\Vector4h.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\Source\OpenTK\Platform\DesktopGraphicsContext.cs">
       <Link>OpenTK\Platform\DesktopGraphicsContext.cs</Link>
     </Compile>
@@ -627,5 +515,18 @@
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\OpenTK.Math\OpenTK.Math.csproj">
+      <Project>{767ed049-581c-45ff-80a4-335827719124}</Project>
+      <Name>OpenTK.Math</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  <Target Name="AfterBuild">
+    <Exec Command="mono $(OutputPath)..\..\Tools\Debug\Rewrite.exe $(OutputPath)$(AssemblyName).dll ..\..\..\OpenTK.snk -debug" Condition="$(OS) != 'Windows_NT' and $(Configuration) == 'Debug'" />
+    <Exec Command="mono $(OutputPath)..\..\Tools\Release\Rewrite.exe $(OutputPath)$(AssemblyName).dll ..\..\..\OpenTK.snk" Condition="$(OS) != 'Windows_NT' and $(Configuration) != 'Debug'" />
+  </Target>
+  <PropertyGroup>
+    <PostBuildEvent>..\..\Tools\Debug\Rewrite.exe OpenTK-1.1.dll ..\..\..\OpenTK.snk -debug</PostBuildEvent>
+  </PropertyGroup>
 </Project>

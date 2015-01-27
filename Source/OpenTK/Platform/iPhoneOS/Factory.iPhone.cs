@@ -26,12 +26,14 @@
 //
 #endregion
 
+extern alias libXam;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 #if XAMCORE_2_0
-using OpenGLES;
+using libXam.OpenGLES;
 #else
 using MonoTouch.OpenGLES;
 #endif

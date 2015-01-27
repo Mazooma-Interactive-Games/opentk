@@ -6,11 +6,17 @@
  */
 #endregion
 
+#if __IOS__
+extern alias libXam;
+using libXam.System.Drawing;
+#else
+using System.Drawing;
+#endif
+
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Diagnostics;
-using System.Drawing;
 
 namespace OpenTK
 {

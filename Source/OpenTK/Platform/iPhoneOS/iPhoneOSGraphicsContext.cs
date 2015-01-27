@@ -7,11 +7,13 @@
  */
 #endregion
 
+extern alias libXam;
+
 using System;
 
 #if XAMCORE_2_0
-using ObjCRuntime;
-using OpenGLES;
+using libXam.ObjCRuntime;
+using libXam.OpenGLES;
 #else
 using MonoTouch.ObjCRuntime;
 using MonoTouch.OpenGLES;

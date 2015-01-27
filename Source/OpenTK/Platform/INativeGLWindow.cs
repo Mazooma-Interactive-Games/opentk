@@ -6,11 +6,15 @@
  */
 #endregion
 
-using System;
-using System.Collections.Generic;
-#if !MINIMAL
+#if __IOS__
+extern alias libXam;
+using libXam.System.Drawing;
+#else
 using System.Drawing;
 #endif
+
+using System;
+using System.Collections.Generic;
 using System.Text;
 
 using OpenTK.Input;

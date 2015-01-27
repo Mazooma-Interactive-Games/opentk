@@ -25,11 +25,15 @@
 //
 #endregion
 
-using System;
-using System.ComponentModel;
-#if !MINIMAL
+#if __IOS__
+extern alias libXam;
+using libXam.System.Drawing;
+#else
 using System.Drawing;
 #endif
+
+using System;
+using System.ComponentModel;
 using OpenTK.Graphics;
 using OpenTK.Input;
 using OpenTK.Platform;

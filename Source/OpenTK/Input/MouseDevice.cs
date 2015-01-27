@@ -1,5 +1,12 @@
 ﻿#define COMPAT_REV1519 // Keeps compatibility with revision 1519
 
+#if __IOS__
+extern alias libXam;
+using libXam.System.Drawing;
+#else
+using System.Drawing;
+#endif
+
  #region License
  //
  // The Open Toolkit Library License
@@ -30,9 +37,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-#if !MINIMAL
-using System.Drawing;
-#endif
 using System.Text;
 
 

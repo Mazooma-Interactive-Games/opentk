@@ -5,6 +5,8 @@
  */
 #endregion
 
+extern alias libXam;
+
 #region --- Using Directives ---
 
 using System;
@@ -15,7 +17,7 @@ using System.Reflection;
 using System.Diagnostics;
 
 #if XAMCORE_2_0
-using OpenGLES;
+using libXam.OpenGLES;
 #else
 using MonoTouch.OpenGLES;
 #endif
