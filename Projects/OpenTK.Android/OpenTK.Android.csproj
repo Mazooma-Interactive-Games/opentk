@@ -484,9 +484,6 @@
     <Compile Include="..\..\Source\OpenTK\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\Source\GlobalAssemblyInfo.cs">
-      <Link>Properties\GlobalAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\Source\OpenTK\Graphics\ES20\ES20Obsolete.cs">
       <Link>OpenTK\Graphics\ES20\ES20Obsolete.cs</Link>
     </Compile>

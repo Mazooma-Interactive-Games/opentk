@@ -114,9 +114,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\GlobalAssemblyInfo.cs">
-      <Link>Properties\GlobalAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="CppSpecWriter.cs" />
     <Compile Include="CSharpSpecWriter.cs" />
     <Compile Include="FuncProcessor.cs" />
@@ -276,6 +273,5 @@
   </ProjectExtensions>
   <ItemGroup>
     <Folder Include="Specifications\Docs\" />
-    <Folder Include="ES\" />
   </ItemGroup>
 </Project>
