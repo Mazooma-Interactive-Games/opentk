@@ -269,7 +269,6 @@ namespace OpenTK.Platform
 
             if (e.XDelta == 0 && e.YDelta == 0)
             {
-                Debug.WriteLine("OnMouseMove called without moving the mouse");
                 return;
             }
 
@@ -287,7 +286,6 @@ namespace OpenTK.Platform
 
             if (dx == 0 && dy == 0)
             {
-                Debug.WriteLine("OnMouseWheel called without moving the mouse wheel.");
                 return;
             }
 
