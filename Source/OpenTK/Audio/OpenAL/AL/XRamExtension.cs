@@ -8,6 +8,7 @@
 #endregion
 
 using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace OpenTK.Audio.OpenAL
@@ -81,7 +82,7 @@ namespace OpenTK.Audio.OpenAL
                  AL_STORAGE_HARDWARE == 0 ||
                  AL_STORAGE_ACCESSIBLE == 0)
             {
-                Debug.WriteLine("X-Ram: Token values could not be retrieved.");
+              //  Debug.WriteLine("X-Ram: Token values could not be retrieved.");
                 return;
             }
 
@@ -94,7 +95,7 @@ namespace OpenTK.Audio.OpenAL
             }
             catch (Exception e)
             {
-                Debug.WriteLine("X-Ram: Attempt to marshal function pointers with AL.GetProcAddress failed. " + e.ToString());
+              //  Debug.WriteLine("X-Ram: Attempt to marshal function pointers with AL.GetProcAddress failed. " + e.ToString());
                 return;
             }
 

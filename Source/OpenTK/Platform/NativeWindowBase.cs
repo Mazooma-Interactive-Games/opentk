@@ -474,7 +474,7 @@ namespace OpenTK.Platform
 
         ~NativeWindowBase()
         {
-            Debug.Print("NativeWindowBase leaked, did you forget to call Dispose()?");
+           // Debug.Print("NativeWindowBase leaked, did you forget to call Dispose()?");
             Dispose(false);
         }
 

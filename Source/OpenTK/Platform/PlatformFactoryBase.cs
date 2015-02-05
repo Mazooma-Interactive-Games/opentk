@@ -30,6 +30,7 @@
 using System;
 using OpenTK.Graphics;
 using OpenTK.Input;
+using System.Diagnostics;
 
 namespace OpenTK.Platform
 {
@@ -97,7 +98,7 @@ namespace OpenTK.Platform
                 }
                 else
                 {
-                    Debug.Print("[OpenTK] {0} leaked, did you forget to call Dispose()?", GetType());
+                  //  Debug.Print("[OpenTK] {0} leaked, did you forget to call Dispose()?", GetType());
                 }
                 IsDisposed = true;
             }

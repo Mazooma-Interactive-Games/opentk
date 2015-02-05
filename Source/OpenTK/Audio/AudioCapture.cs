@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 using OpenTK.Audio.OpenAL;
+using System.Diagnostics;
 
 namespace OpenTK.Audio
 {
@@ -91,14 +92,14 @@ namespace OpenTK.Audio
 
             if (Handle == IntPtr.Zero)
             {
-                Debug.WriteLine(ErrorMessage(deviceName, frequency, sampleFormat, bufferSize));
+             //   Debug.WriteLine(ErrorMessage(deviceName, frequency, sampleFormat, bufferSize));
                 device_name = "IntPtr.Zero";
                 Handle = Alc.CaptureOpenDevice(null, frequency, sampleFormat, bufferSize);
             }
 
             if (Handle == IntPtr.Zero)
             {
-                Debug.WriteLine(ErrorMessage("IntPtr.Zero", frequency, sampleFormat, bufferSize));
+            //    Debug.WriteLine(ErrorMessage("IntPtr.Zero", frequency, sampleFormat, bufferSize));
                 device_name = AudioDeviceEnumerator.DefaultRecordingDevice;
                 Handle = Alc.CaptureOpenDevice(AudioDeviceEnumerator.DefaultRecordingDevice, frequency, sampleFormat, bufferSize);
             }
@@ -106,7 +107,7 @@ namespace OpenTK.Audio
             if (Handle == IntPtr.Zero)
             {
                 // Everything we tried failed. Capture may not be supported, bail out.
-                Debug.WriteLine(ErrorMessage(AudioDeviceEnumerator.DefaultRecordingDevice, frequency, sampleFormat, bufferSize));
+             //   Debug.WriteLine(ErrorMessage(AudioDeviceEnumerator.DefaultRecordingDevice, frequency, sampleFormat, bufferSize));
                 device_name = "None";
 
                 throw new AudioDeviceException("All attempts to open capture devices returned IntPtr.Zero. See debug log for verbose list.");

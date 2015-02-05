@@ -1220,7 +1220,7 @@ namespace OpenTK.Audio.OpenAL
 
             if (!AudioContext.CurrentContext.SupportsExtension("ALC_EXT_EFX"))
             {
-                Debug.Print("EFX Extension (ALC_EXT_EFX) is not supported(AudioContext: {0}).", AudioContext.CurrentContext.ToString());
+              //  Debug.Print("EFX Extension (ALC_EXT_EFX) is not supported(AudioContext: {0}).", AudioContext.CurrentContext.ToString());
                 return;
             }
             // Console.WriteLine("ALC_EXT_EFX found. Efx can be used.");
@@ -1239,7 +1239,7 @@ namespace OpenTK.Audio.OpenAL
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Failed to marshal Effect functions. " + e.ToString());
+               // Debug.WriteLine("Failed to marshal Effect functions. " + e.ToString());
                 return;
             }
             // Console.WriteLine("Effect functions appear to be ok.");
@@ -1256,7 +1256,7 @@ namespace OpenTK.Audio.OpenAL
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Failed to marshal Filter functions. " + e.ToString());
+               // Debug.WriteLine("Failed to marshal Filter functions. " + e.ToString());
                 return;
             }
             // Console.WriteLine("Filter functions appear to be ok.");
@@ -1273,7 +1273,7 @@ namespace OpenTK.Audio.OpenAL
             }
             catch (Exception e)
             {
-                Debug.WriteLine("Failed to marshal AuxiliaryEffectSlot functions. " + e.ToString());
+                //Debug.WriteLine("Failed to marshal AuxiliaryEffectSlot functions. " + e.ToString());
                 return;
             }
             // Console.WriteLine("Auxiliary Effect Slot functions appear to be ok.");
