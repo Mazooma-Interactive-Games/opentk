@@ -25,9 +25,4 @@
 
 namespace OpenTK.Graphics.ES10
 {
-    using System;
-    using System.Text;
-    using System.Runtime.InteropServices;
-    using OpenTK.Extensions;
-
 }

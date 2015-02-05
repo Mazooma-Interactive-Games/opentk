@@ -5,7 +5,6 @@
 #endregion
 
 using System.Collections.Generic;
-using System.IO;
 using Bind.Structures;
 
 namespace Bind

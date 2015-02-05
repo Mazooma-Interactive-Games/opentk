@@ -28,7 +28,6 @@
 //  Created by Erik Ylvisaker on 3/17/08.
 
 
-using System;
 using System.Runtime.InteropServices;
 
 namespace OpenTK.Platform.MacOS.Carbon

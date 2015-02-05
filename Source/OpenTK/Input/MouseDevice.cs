@@ -35,9 +35,6 @@ using System.Drawing;
  #endregion
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
 
 
 namespace OpenTK.Input

@@ -8,9 +8,6 @@
 
 using System;
 
-using OpenTK.Input;
-using System.Diagnostics;
-
 #endregion
 
 namespace OpenTK.Input

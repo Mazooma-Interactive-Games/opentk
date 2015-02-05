@@ -29,9 +29,6 @@
 
 using System;
 using System.IO;
-using System.Text.RegularExpressions;
-using Bind.Structures;
-using Enum=Bind.Structures.Enum;
 
 namespace Bind
 {

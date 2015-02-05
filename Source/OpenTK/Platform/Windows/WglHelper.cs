@@ -9,9 +9,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Reflection;
-using OpenTK.Graphics;
 
 namespace OpenTK.Platform.Windows
 {

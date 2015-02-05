@@ -26,9 +26,7 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing;
 using OpenTK.Input;
 
 namespace OpenTK.Platform.SDL2

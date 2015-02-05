@@ -5,10 +5,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Xml.XPath;
 
 namespace Bind.Structures
 {

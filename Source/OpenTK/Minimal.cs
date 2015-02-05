@@ -2,13 +2,7 @@
 extern alias libXam;
 using libXam.System.Drawing;
 #else
-using System.Drawing;
 #endif
-
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text;
 
 #if !NET40
 namespace System.Runtime.CompilerServices

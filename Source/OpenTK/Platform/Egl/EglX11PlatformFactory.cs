@@ -27,9 +27,6 @@
 
 #if X11
 
-using System;
-using System.Collections.Generic;
-using System.Text;
 using OpenTK.Graphics;
 using OpenTK.Platform.X11;
 

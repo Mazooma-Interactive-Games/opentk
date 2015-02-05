@@ -29,8 +29,6 @@
 
 using System;
 using System.ComponentModel;
-using System.Runtime.InteropServices;
-using OpenTK.Platform.MacOS;
 
 namespace OpenTK.Platform.MacOS
 {

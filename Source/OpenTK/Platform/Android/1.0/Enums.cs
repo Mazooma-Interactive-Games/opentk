@@ -7,8 +7,6 @@
  */
 #endregion
 
-using System;
-
 namespace OpenTK.Graphics {
 	public enum GLVersion {
 		ES1 = 1,

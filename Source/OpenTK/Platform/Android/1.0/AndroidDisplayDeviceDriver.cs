@@ -7,9 +7,6 @@
  */
 #endregion
 
-using System;
-using OpenTK.Graphics;
-
 namespace OpenTK.Platform.Android
 {
 	class AndroidDisplayDeviceDriver : IDisplayDeviceDriver

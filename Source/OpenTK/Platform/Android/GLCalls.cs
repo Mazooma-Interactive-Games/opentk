@@ -8,13 +8,7 @@
 #endregion
 
 using System;
-using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Platform;
-using OpenTK.Platform.Android;
-
-using All  = OpenTK.Graphics.ES11.All;
-
 using ES11 = OpenTK.Graphics.ES11;
 using ES20 = OpenTK.Graphics.ES20;
 using ES30 = OpenTK.Graphics.ES30;

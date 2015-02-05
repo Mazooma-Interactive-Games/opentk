@@ -4,9 +4,6 @@
  */
 #endregion
 
-using System.Collections.Generic;
-using Bind.Structures;
-
 namespace Bind
 {
     interface ISpecWriter

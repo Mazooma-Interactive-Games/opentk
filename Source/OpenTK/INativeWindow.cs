@@ -33,10 +33,7 @@ using System.Drawing;
 #endif
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-
-using System.Text;
 using OpenTK.Platform;
 
 namespace OpenTK

@@ -28,8 +28,6 @@
 #endregion
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using OpenTK.Input;
 using System.Runtime.InteropServices;
 using System.Security;

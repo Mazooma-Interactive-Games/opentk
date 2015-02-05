@@ -32,8 +32,6 @@ using System.Drawing;
 #if !(ANDROID || IPHONE || MINIMAL)
 using System.Drawing.Imaging;
 #endif
-using System.Runtime.InteropServices;
-using OpenTK;
 using OpenTK.Input;
 using System.Text;
 

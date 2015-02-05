@@ -7,8 +7,6 @@
  * http://www.OpenTK.net */
 #endregion
 
-using System;
-
 namespace OpenTK.Audio.OpenAL
 {
     #region Effect

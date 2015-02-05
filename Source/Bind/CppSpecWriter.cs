@@ -27,7 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -37,7 +36,6 @@ namespace Bind
 {
     using Delegate = Bind.Structures.Delegate;
     using Enum = Bind.Structures.Enum;
-    using Type = Bind.Structures.Type;
 
     sealed class CppSpecWriter : ISpecWriter
     {

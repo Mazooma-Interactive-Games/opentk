@@ -27,8 +27,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Collections.Generic;
-using System.Text;
 using OpenTK.Graphics;
 
 namespace OpenTK.Platform.Egl

@@ -13,11 +13,7 @@ using Android.Util;
 using Android.Views;
 using Android.Runtime;
 using Javax.Microedition.Khronos.Egl;
-
-using OpenTK.Platform;
 using OpenTK.Graphics;
-using OpenTK.Graphics.ES11;
-
 using GL11 = OpenTK.Graphics.ES11.GL;
 using GL20 = OpenTK.Graphics.ES20.GL;
 

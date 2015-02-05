@@ -30,8 +30,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using Microsoft.Win32;
 using OpenTK.Input;
 
 namespace OpenTK.Platform.Windows

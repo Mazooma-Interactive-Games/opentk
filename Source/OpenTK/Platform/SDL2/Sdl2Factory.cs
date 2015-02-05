@@ -26,7 +26,6 @@
 #endregion
 
 using System;
-using System.Diagnostics;
 using OpenTK.Graphics;
 using OpenTK.Input;
 

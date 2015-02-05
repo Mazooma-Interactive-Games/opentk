@@ -27,7 +27,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,9 +34,7 @@ using Bind.Structures;
 
 namespace Bind
 {
-    using Delegate = Bind.Structures.Delegate;
     using Enum = Bind.Structures.Enum;
-    using Type = Bind.Structures.Type;
 
     sealed class JavaSpecWriter : ISpecWriter
     {

@@ -8,28 +8,15 @@
 #endregion
 
 using System;
-using System.ComponentModel;
 using System.Drawing;
-using System.Timers;
 using System.Threading;
 using System.Threading.Tasks;
-
-using OpenTK;
 using OpenTK.Graphics;
-using OpenTK.Platform;
-using OpenTK.Platform.Android;
-
 using Android.Content;
 using Android.Util;
 using Android.Views;
 using Android.Runtime;
 using Android.Graphics;
-
-using Java.Util;
-
-using All = OpenTK.Graphics.ES11.All;
-using ES11 = OpenTK.Graphics.ES11;
-using ES20 = OpenTK.Graphics.ES20;
 
 namespace OpenTK.Platform.Android
 {

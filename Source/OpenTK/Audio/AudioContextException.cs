@@ -25,11 +25,6 @@
 //
 #endregion
 
-
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace OpenTK.Audio
 {
     /// <summary>Represents exceptions related to an OpenTK.Audio.AudioContext.</summary>
