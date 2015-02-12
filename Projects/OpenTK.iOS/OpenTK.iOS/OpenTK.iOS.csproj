@@ -492,18 +492,15 @@
     <Compile Include="..\..\..\Source\OpenTK\Properties\AssemblyInfo.cs">
       <Link>Properties\AssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Source\GlobalAssemblyInfo.cs">
-      <Link>Properties\GlobalAssemblyInfo.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\Source\OpenTK\Platform\MacOS\NS.cs">
       <Link>OpenTK\Platform\MacOS\NS.cs</Link>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\..\Source\OpenTK\OpenTK.dll.config">
+    <EmbeddedResource Include="..\..\..\Source\OpenTK\OpenTK.dll.config">
       <Link>OpenTK.dll.config</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include="..\..\..\Source\OpenTK\Platform\iPhoneOS\BindingsBase.iPhone.cs">
       <Link>OpenTK\Platform\iPhoneOS\BindingsBase.iPhone.cs</Link>
       <DependentUpon>GraphicsBindingsBase.iPhone.cs</DependentUpon>

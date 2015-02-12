@@ -71,7 +71,12 @@ namespace OpenTK.Audio.OpenAL
 
         #region Constants
 
+#if __IOS__
+        internal const string Lib = "/System/Library/Frameworks/OpenAL.framework/OpenAL";
+#else
         internal const string Lib = "openal32.dll";
+#endif
+
         private const CallingConvention Style = CallingConvention.Cdecl;
 
         #endregion Constants

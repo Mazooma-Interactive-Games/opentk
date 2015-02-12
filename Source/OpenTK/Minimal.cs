@@ -7,7 +7,6 @@ using libXam.System.Drawing;
 #if !NET40
 using System;
 using System.Diagnostics;
-using System.Drawing;
 namespace System.Runtime.CompilerServices
 {
     /// <summary>
