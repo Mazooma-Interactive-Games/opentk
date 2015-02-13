@@ -628,8 +628,8 @@ namespace OpenTK.Platform.iPhoneOS
             gl.FramebufferRenderbuffer(All.FramebufferOes, All.ColorAttachment0Oes, All.RenderbufferOes, renderbuffer);
 
             Size newSize = new Size(
-                    (int)Math.Round(eaglLayer.Bounds.Size.Width),
-                    (int)Math.Round(eaglLayer.Bounds.Size.Height));
+                    (int)Math.Round(eaglLayer.Bounds.Size.Width * ContentScaleFactor),
+                    (int)Math.Round(eaglLayer.Bounds.Size.Height * ContentScaleFactor));
             Size = newSize;
 
             gl.Viewport(0, 0, newSize.Width, newSize.Height);
