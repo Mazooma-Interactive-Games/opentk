@@ -2,6 +2,7 @@
 extern alias libXam;
 using libXam.System.Drawing;
 #else
+using System.Drawing;
 #endif
 
 #if !NET40
