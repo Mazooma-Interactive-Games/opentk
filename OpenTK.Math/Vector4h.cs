@@ -126,7 +126,6 @@ namespace OpenTK
         /// The new Half4 instance will convert the Vector4 into 16-bit half-precision floating-point.
         /// </summary>
         /// <param name="v">OpenTK.Vector4</param>
-        [CLSCompliant(false)]
         public Vector4h(Vector4 v)
         {
             X = new Half(v.X);
@@ -140,7 +139,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector4</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector4h(Vector4 v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
@@ -179,7 +177,6 @@ namespace OpenTK
         /// The new Half4 instance will convert the Vector4d into 16-bit half-precision floating-point.
         /// </summary>
         /// <param name="v">OpenTK.Vector4d</param>
-        [CLSCompliant(false)]
         public Vector4h(Vector4d v)
         {
             X = new Half(v.X);
@@ -193,7 +190,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector4d</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector4h(Vector4d v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
@@ -207,7 +203,6 @@ namespace OpenTK
         /// This is the faster constructor.
         /// </summary>
         /// <param name="v">OpenTK.Vector4d</param>
-        [CLSCompliant(false)]
         public Vector4h(ref Vector4d v)
         {
             X = new Half(v.X);
@@ -221,7 +216,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector4d</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector4h(ref Vector4d v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);

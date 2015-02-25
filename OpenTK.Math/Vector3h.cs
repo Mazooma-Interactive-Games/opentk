@@ -115,7 +115,6 @@ namespace OpenTK
         /// The new Half3 instance will convert the Vector3 into 16-bit half-precision floating-point.
         /// </summary>
         /// <param name="v">OpenTK.Vector3</param>
-        [CLSCompliant(false)]
         public Vector3h(Vector3 v)
         {
             X = new Half(v.X);
@@ -128,7 +127,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector3</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector3h(Vector3 v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
@@ -153,7 +151,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector3</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector3h(ref Vector3 v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
@@ -165,7 +162,6 @@ namespace OpenTK
         /// The new Half3 instance will convert the Vector3d into 16-bit half-precision floating-point.
         /// </summary>
         /// <param name="v">OpenTK.Vector3d</param>
-        [CLSCompliant(false)]
         public Vector3h(Vector3d v)
         {
             X = new Half(v.X);
@@ -178,7 +174,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector3d</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector3h(Vector3d v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
@@ -191,7 +186,6 @@ namespace OpenTK
         /// This is the faster constructor.
         /// </summary>
         /// <param name="v">OpenTK.Vector3d</param>
-        [CLSCompliant(false)]
         public Vector3h(ref Vector3d v)
         {
             X = new Half(v.X);
@@ -204,7 +198,6 @@ namespace OpenTK
         /// </summary>
         /// <param name="v">OpenTK.Vector3d</param>
         /// <param name="throwOnError">Enable checks that will throw if the conversion result is not meaningful.</param>
-        [CLSCompliant(false)]
         public Vector3h(ref Vector3d v, bool throwOnError)
         {
             X = new Half(v.X, throwOnError);
