@@ -41,7 +41,7 @@ using OpenTK.Input;
 namespace OpenTK.Platform
 {
     // Common base class for all INativeWindow implementations
-    abstract class NativeWindowBase : INativeWindow
+    public abstract class NativeWindowBase : INativeWindow
     {
         readonly LegacyInputDriver LegacyInputDriver;
 

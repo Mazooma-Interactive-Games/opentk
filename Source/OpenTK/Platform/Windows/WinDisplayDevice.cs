@@ -70,7 +70,7 @@ namespace OpenTK.Platform.Windows
                     | Constants.DM_DISPLAYFREQUENCY;
             }
 
-            return Constants.DISP_CHANGE_SUCCESSFUL == 
+            return Constants.DISP_CHANGE_SUCCESSFUL ==
                 Functions.ChangeDisplaySettingsEx((string)device.Id, mode, IntPtr.Zero,
                     ChangeDisplaySettingsEnum.Fullscreen, IntPtr.Zero);
         }

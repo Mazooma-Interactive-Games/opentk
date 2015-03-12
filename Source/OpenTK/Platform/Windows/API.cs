@@ -995,21 +995,26 @@ namespace OpenTK.Platform.Windows
 
         #region EnumDisplayDevices
 
-        [DllImport("user32.dll", SetLastError = true, CharSet=CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern BOOL EnumDisplayDevices([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpDevice,
             DWORD iDevNum, [In, Out] WindowsDisplayDevice lpDisplayDevice, DWORD dwFlags);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern BOOL EnumDisplayDevices([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpDevice,
+            DWORD iDevNum, [In, Out] byte[] lpDisplayDevice, DWORD dwFlags);
 
         #endregion
 
         #region EnumDisplaySettings
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern BOOL EnumDisplaySettings([MarshalAs(UnmanagedType.LPTStr)] string device_name,
             int graphics_mode, [In, Out] DeviceMode device_mode);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern BOOL EnumDisplaySettings([MarshalAs(UnmanagedType.LPTStr)] string device_name,
              DisplayModeSettingsEnum graphics_mode, [In, Out] DeviceMode device_mode);
@@ -1018,11 +1023,11 @@ namespace OpenTK.Platform.Windows
 
         #region EnumDisplaySettingsEx
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern BOOL EnumDisplaySettingsEx([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpszDeviceName, DisplayModeSettingsEnum iModeNum,
             [In, Out] DeviceMode lpDevMode, DWORD dwFlags);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern BOOL EnumDisplaySettingsEx([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpszDeviceName, DWORD iModeNum,
             [In, Out] DeviceMode lpDevMode, DWORD dwFlags);
 
@@ -2202,14 +2207,16 @@ namespace OpenTK.Platform.Windows
     {
         internal WindowsDisplayDevice()
         {
-            size = (short)Marshal.SizeOf(this);
+            cb = Marshal.SizeOf(this);
         }
-        readonly DWORD size;
+        [MarshalAs(UnmanagedType.U4)]
+        internal int cb;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
         internal string DeviceName;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         internal string DeviceString;
-        internal DisplayDeviceStateFlags StateFlags;    // DWORD
+        [MarshalAs(UnmanagedType.U4)]
+        internal DisplayDeviceStateFlags StateFlags;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
         internal string DeviceID;
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 128)]
@@ -4024,7 +4031,7 @@ namespace OpenTK.Platform.Windows
 
     #region WindowMessage
 
-    internal enum WindowMessage : int
+    public enum WindowMessage : int
     {
         NULL = 0x0000,
         CREATE = 0x0001,
@@ -4590,7 +4597,7 @@ namespace OpenTK.Platform.Windows
 
     [SuppressUnmanagedCodeSecurity]
     [UnmanagedFunctionPointer(CallingConvention.Winapi)]
-    internal delegate IntPtr WindowProcedure(IntPtr handle, WindowMessage message, IntPtr wParam, IntPtr lParam);
+    public delegate IntPtr WindowProcedure(IntPtr handle, WindowMessage message, IntPtr wParam, IntPtr lParam);
 
     #region Message
 

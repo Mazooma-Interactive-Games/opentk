@@ -544,6 +544,15 @@ namespace OpenTK
             }
         }
 
+        public INativeWindow TheImplementation
+        {
+            get
+            {
+                EnsureUndisposed();
+                return implementation;
+            }
+        }
+
         #endregion
 
         #region WindowState

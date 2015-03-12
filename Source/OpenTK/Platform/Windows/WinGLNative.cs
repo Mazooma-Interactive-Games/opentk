@@ -41,7 +41,7 @@ namespace OpenTK.Platform.Windows
     /// Drives GameWindow on Windows.
     /// This class supports OpenTK, and is not intended for use by OpenTK programs.
     /// </summary>
-    internal sealed class WinGLNative : NativeWindowBase
+    public sealed class WinGLNative : NativeWindowBase
     {
         #region Fields
 
@@ -51,6 +51,7 @@ namespace OpenTK.Platform.Windows
         readonly IntPtr Instance = Marshal.GetHINSTANCE(typeof(WinGLNative).Module);
         readonly IntPtr ClassName = Marshal.StringToHGlobalAuto(Guid.NewGuid().ToString());
         readonly WindowProcedure WindowProcedureDelegate;
+        public WindowProcedure UnknownWindowMessageDelegate;
 
         readonly uint ModalLoopTimerPeriod = 1;
         UIntPtr timer_handle;
@@ -80,7 +81,7 @@ namespace OpenTK.Platform.Windows
         const ClassStyle DefaultClassStyle = ClassStyle.OwnDC;
 
         const long ExtendedBit = 1 << 24;           // Used to distinguish left and right control, alt and enter keys.
-        
+
         public static readonly uint ShiftLeftScanCode = Functions.MapVirtualKey(VirtualKeys.LSHIFT, 0);
         public static readonly uint ShiftRightScanCode = Functions.MapVirtualKey(VirtualKeys.RSHIFT, 0);
         public static readonly uint ControlLeftScanCode = Functions.MapVirtualKey(VirtualKeys.LCONTROL, 0);
@@ -181,7 +182,7 @@ namespace OpenTK.Platform.Windows
         {
             return Scale(x, ScaleDirection.X);
         }
-        
+
         static int ScaleY(int y)
         {
             return Scale(y, ScaleDirection.Y);
@@ -776,7 +777,9 @@ namespace OpenTK.Platform.Windows
                 case WindowMessage.DESTROY:
                     HandleDestroy(handle, message, wParam, lParam);
                     break;
-
+                default:
+                    if (UnknownWindowMessageDelegate != null) UnknownWindowMessageDelegate(handle, message, wParam, lParam);
+                    break;
                 #endregion
             }
 
@@ -1110,7 +1113,7 @@ namespace OpenTK.Platform.Windows
 
         #region Exists
 
-        public override  bool Exists { get { return exists; } }
+        public override bool Exists { get { return exists; } }
 
         #endregion
 
@@ -1215,7 +1218,7 @@ namespace OpenTK.Platform.Windows
                 }
             }
         }
-        
+
         #endregion
 
         #region Close
