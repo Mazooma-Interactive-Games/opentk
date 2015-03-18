@@ -671,11 +671,6 @@ namespace OpenTK.Platform.Windows
                 case WindowMessage.EXITSIZEMOVE:
                     HandleExitModalLoop(handle, message, wParam, lParam);
                     break;
-                case WindowMessage.SYNCPAINT:
-                case WindowMessage.PAINT:
-                    return new IntPtr(0);
-                case WindowMessage.ERASEBKGND:
-                    return new IntPtr(1);
 
                 case WindowMessage.WINDOWPOSCHANGED:
                     HandleWindowPositionChanged(handle, message, wParam, lParam);
