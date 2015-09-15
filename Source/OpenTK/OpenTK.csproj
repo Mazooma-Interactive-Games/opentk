@@ -2,8 +2,6 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <ProjectType>Local</ProjectType>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{A37A7E14-0000-0000-0000-000000000000}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -78,7 +76,7 @@
     <DebugSymbols>True</DebugSymbols>
     <DebugType>pdbonly</DebugType>
     <Prefer32Bit>false</Prefer32Bit>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>True</SignAssembly>
@@ -664,7 +662,7 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\OpenTK.Math\OpenTK.Math.csproj">
-      <Project>{767ed049-581c-45ff-80a4-335827719124}</Project>
+      <Project>{767ED049-581C-45FF-80A4-335827719124}</Project>
       <Name>OpenTK.Math</Name>
     </ProjectReference>
   </ItemGroup>

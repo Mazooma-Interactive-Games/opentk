@@ -1,39 +1,46 @@
 #region --- License ---
+
 /* Licensed under the MIT/X11 license.
  * Copyright (c) 2006-2008 the OpenTK team.
  * This notice may not be removed.
  * See license.txt for licensing detailed licensing details.
  */
-#endregion
+
+#endregion --- License ---
 
 #if __IOS__
 extern alias libXam;
 using libXam.System.Drawing;
 #else
+
 using System.Drawing;
+
 #endif
 
 using System;
 
 namespace OpenTK
 {
-    /// <summary>Contains information regarding a monitor's display resolution.</summary>
+    /// <summary> Contains information regarding a monitor's display resolution. </summary>
     public class DisplayResolution
     {
-        Rectangle bounds;
-        int bits_per_pixel;
-        float refresh_rate;
+        private Rectangle bounds;
+        private int bits_per_pixel;
+        private float refresh_rate;
 
         #region --- Constructors ---
 
-        internal DisplayResolution() { }
+        internal DisplayResolution()
+        {
+        }
 
         #region public DisplayResolution(int width, int height, int bitsPerPixel, float refreshRate)
 
-        // Creates a new DisplayResolution object for the primary DisplayDevice.
+        // Creates a new DisplayResolution object for the primary DisplayDevice. 
         internal DisplayResolution(int x, int y, int width, int height, int bitsPerPixel, float refreshRate)
         {
-            // Refresh rate may be zero, since this information may not be available on some platforms.
+            Console.WriteLine("-G");
+            // Refresh rate may be zero, since this information may not be available on some platforms. 
             if (width <= 0) throw new ArgumentOutOfRangeException("width", "Must be greater than zero.");
             if (height <= 0) throw new ArgumentOutOfRangeException("height", "Must be greater than zero.");
             if (bitsPerPixel <= 0) throw new ArgumentOutOfRangeException("bitsPerPixel", "Must be greater than zero.");
@@ -44,24 +51,23 @@ namespace OpenTK
             this.refresh_rate = refreshRate;
         }
 
-        #endregion
+        #endregion public DisplayResolution(int width, int height, int bitsPerPixel, float refreshRate)
 
         #region public DisplayResolution(int width, int height, int bitsPerPixel, float refreshRate, DisplayDevice device)
 
 #if false
 
-        /// <summary>
-        /// Creates a new DisplayResolution object for the specified DisplayDevice.
-        /// </summary>
-        /// <param name="width">The requested width in pixels.</param>
-        /// <param name="height">The requested height in pixels.</param>
-        /// <param name="bitsPerPixel">The requested bits per pixel in bits.</param>
-        /// <param name="refreshRate">The requested refresh rate in hertz.</param>
-        /// <remarks>OpenTK will select the closest match between all available resolutions on the specified DisplayDevice.</remarks>
-        /// 
+        /// <summary> Creates a new DisplayResolution object for the specified DisplayDevice. </summary>
+        /// <param name="width">        The requested width in pixels. </param>
+        /// <param name="height">       The requested height in pixels. </param>
+        /// <param name="bitsPerPixel"> The requested bits per pixel in bits. </param>
+        /// <param name="refreshRate">  The requested refresh rate in hertz. </param>
+        /// <remarks>
+        /// OpenTK will select the closest match between all available resolutions on the specified DisplayDevice.
+        /// </remarks>
         public DisplayResolution(int width, int height, int bitsPerPixel, float refreshRate, DisplayDevice device)
         {
-            // Refresh rate may be zero, since this information may not be available on some platforms.
+            // Refresh rate may be zero, since this information may not be available on some platforms. 
             if (width <= 0) throw new ArgumentOutOfRangeException("width", "Must be greater than zero.");
             if (height <= 0) throw new ArgumentOutOfRangeException("height", "Must be greater than zero.");
             if (bitsPerPixel <= 0) throw new ArgumentOutOfRangeException("bitsPerPixel", "Must be greater than zero.");
@@ -76,9 +82,10 @@ namespace OpenTK
             this.refresh_rate = res.refresh_rate;
         }
 #endif
-        #endregion
 
-        #endregion
+        #endregion public DisplayResolution(int width, int height, int bitsPerPixel, float refreshRate, DisplayDevice device)
+
+        #endregion --- Constructors ---
 
         #region --- Public Methods ---
 
@@ -94,76 +101,75 @@ namespace OpenTK
             get { return bounds; }
         }
 
-        #endregion
+        #endregion Bounds
 
         #region public int Width
 
-        /// <summary>Gets a System.Int32 that contains the width of this display in pixels.</summary>
+        /// <summary> Gets a System.Int32 that contains the width of this display in pixels. </summary>
         public int Width
         {
             get { return bounds.Width; }
             internal set { bounds.Width = value; }
         }
 
-        #endregion
+        #endregion public int Width
 
         #region public int Height
 
-        /// <summary>Gets a System.Int32 that contains the height of this display in pixels.</summary>
+        /// <summary> Gets a System.Int32 that contains the height of this display in pixels. </summary>
         public int Height
         {
             get { return bounds.Height; }
             internal set { bounds.Height = value; }
         }
 
-        #endregion
+        #endregion public int Height
 
         #region public int BitsPerPixel
 
-        /// <summary>Gets a System.Int32 that contains number of bits per pixel of this display. Typical values include 8, 16, 24 and 32.</summary>
+        /// <summary>
+        /// Gets a System.Int32 that contains number of bits per pixel of this display. Typical
+        /// values include 8, 16, 24 and 32.
+        /// </summary>
         public int BitsPerPixel
         {
             get { return bits_per_pixel; }
             internal set { bits_per_pixel = value; }
         }
 
-        #endregion
+        #endregion public int BitsPerPixel
 
         #region public float RefreshRate
 
-        /// <summary>
-        /// Gets a System.Single representing the vertical refresh rate of this display.
-        /// </summary>
+        /// <summary> Gets a System.Single representing the vertical refresh rate of this display. </summary>
         public float RefreshRate
         {
             get { return refresh_rate; }
             internal set { refresh_rate = value; }
         }
 
-        #endregion
+        #endregion public float RefreshRate
 
-        #endregion
+        #endregion --- Public Methods ---
 
         #region --- Overrides ---
 
         #region public override string ToString()
 
-        /// <summary>
-        /// Returns a System.String representing this DisplayResolution.
-        /// </summary>
-        /// <returns>A System.String representing this DisplayResolution.</returns>
+        /// <summary> Returns a System.String representing this DisplayResolution. </summary>
+        /// <returns> A System.String representing this DisplayResolution. </returns>
         public override string ToString()
         {
             return String.Format("{0}x{1}@{2}Hz", Bounds, bits_per_pixel, refresh_rate);
         }
 
-        #endregion
+        #endregion public override string ToString()
 
         #region public override bool Equals(object obj)
 
-        /// <summary>Determines whether the specified resolutions are equal.</summary>
-        /// <param name="obj">The System.Object to check against.</param>
-        /// <returns>True if the System.Object is an equal DisplayResolution; false otherwise.</returns>
+        /// <summary> Determines whether the specified resolutions are equal. </summary>
+        /// <param name="obj"> The System.Object to check against. </param>
+        /// <returns> True if the System.Object is an equal DisplayResolution; false otherwise. </returns>
         public override bool Equals(object obj)
         {
             if (obj == null) return false;
@@ -180,7 +186,7 @@ namespace OpenTK
             return false;
         }
 
-        #endregion
+        #endregion public override bool Equals(object obj)
 
         #region public override int GetHashCode()
 
@@ -191,9 +197,9 @@ namespace OpenTK
             return Bounds.GetHashCode() ^ bits_per_pixel ^ refresh_rate.GetHashCode();
         }
 
-        #endregion
+        #endregion public override int GetHashCode()
 
-        #endregion
+        #endregion --- Overrides ---
 
         #region --- Operator Overloads ---
 
@@ -203,7 +209,7 @@ namespace OpenTK
         /// <param name="left">The first instance.</param>
         /// <param name="right">The second instance.</param>
         /// <returns>True, if left equals right; false otherwise.</returns>
-        public static bool operator== (DisplayResolution left, DisplayResolution right)
+        public static bool operator ==(DisplayResolution left, DisplayResolution right)
         {
             if (((object)left) == null && ((object)right) == null)
                 return true;
@@ -224,6 +230,6 @@ namespace OpenTK
             return !(left == right);
         }
 
-        #endregion
+        #endregion --- Operator Overloads ---
     }
 }
