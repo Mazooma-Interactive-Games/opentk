@@ -39,7 +39,6 @@ namespace OpenTK
         // Creates a new DisplayResolution object for the primary DisplayDevice. 
         internal DisplayResolution(int x, int y, int width, int height, int bitsPerPixel, float refreshRate)
         {
-            Console.WriteLine("-G");
             // Refresh rate may be zero, since this information may not be available on some platforms. 
             if (width <= 0) throw new ArgumentOutOfRangeException("width", "Must be greater than zero.");
             if (height <= 0) throw new ArgumentOutOfRangeException("height", "Must be greater than zero.");

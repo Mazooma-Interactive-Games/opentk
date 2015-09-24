@@ -1117,29 +1117,27 @@ namespace OpenTK.Platform.Windows
 
         #region EnumDisplayDevices
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern BOOL EnumDisplayDevices([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpDevice,
-            DWORD iDevNum, [In, Out] WindowsDisplayDevice lpDisplayDevice, DWORD dwFlags);
+        public static extern BOOL EnumDisplayDevicesW([MarshalAs(UnmanagedType.LPTStr)] string lpDevice,
+            Int32 iDevNum, [In, Out] WindowsDisplayDevice lpDisplayDevice, Int32 dwFlags);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.StdCall)]
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern BOOL EnumDisplayDevices([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpDevice,
-            DWORD iDevNum, [In, Out] byte[] lpDisplayDevice, DWORD dwFlags);
+        public static extern BOOL EnumDisplayDevicesW([MarshalAs(UnmanagedType.LPTStr)] string lpDevice,
+            Int32 iDevNum, [In, Out] byte[] lpDisplayDevice, Int32 dwFlags);
 
         #endregion EnumDisplayDevices
 
         #region EnumDisplaySettings
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern BOOL EnumDisplaySettings([MarshalAs(UnmanagedType.LPTStr)] string device_name,
-            int graphics_mode, [In, Out] DeviceMode device_mode);
 
-        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern BOOL EnumDisplaySettings([MarshalAs(UnmanagedType.LPTStr)] string device_name,
-             DisplayModeSettingsEnum graphics_mode, [In, Out] DeviceMode device_mode);
+        internal static extern BOOL EnumDisplaySettingsW([MarshalAs(UnmanagedType.LPTStr)] string device_name,
+            int graphics_mode, IntPtr device_mode);
+
 
         #endregion EnumDisplaySettings
 
@@ -1156,6 +1154,10 @@ namespace OpenTK.Platform.Windows
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern BOOL EnumDisplaySettingsEx([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpszDeviceName, DWORD iModeNum,
             [In, Out] DeviceMode lpDevMode, DWORD dwFlags);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern BOOL EnumDisplaySettingsEx([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpszDeviceName, DWORD iModeNum,
+             IntPtr lpDevMode, DWORD dwFlags);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern BOOL EnumDisplaySettingsExA([MarshalAs(UnmanagedType.LPTStr)] LPCTSTR lpszDeviceName, DWORD iModeNum,
@@ -2279,7 +2281,21 @@ namespace OpenTK.Platform.Windows
         internal DeviceMode()
         {
             Size = (Int16)Marshal.SizeOf(this);
+            DriverExtra = 0;
         }
+
+        internal DeviceMode(Byte[] data)
+        {
+            Size = (Int16)Marshal.SizeOf(this);
+            Position = new POINT(BitConverter.ToInt32(data, 76), BitConverter.ToInt32(data, 80));
+            DisplayOrientation = BitConverter.ToInt32(data, 84);
+            DisplayFixedOutput = BitConverter.ToInt32(data, 88);
+            PelsWidth = BitConverter.ToInt32(data, 172);
+            PelsHeight = BitConverter.ToInt32(data, 176);
+            DisplayFlags = BitConverter.ToInt32(data, 180);
+            DisplayFrequency = BitConverter.ToInt32(data, 184);
+        }
+
         [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 32)]
         internal string DeviceName;
         [MarshalAs(UnmanagedType.U2)]
@@ -2360,7 +2376,7 @@ namespace OpenTK.Platform.Windows
     /// The DISPLAY_DEVICE structure receives information about the display device specified by the
     /// iDevNum parameter of the EnumDisplayDevices function.
     /// </summary>
-    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
+    [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
     internal class WindowsDisplayDevice
     {
         internal WindowsDisplayDevice()

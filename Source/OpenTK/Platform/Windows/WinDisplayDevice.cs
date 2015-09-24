@@ -110,43 +110,45 @@ namespace OpenTK.Platform.Windows
                 int device_count = 0, mode_count = 0;
                 // Get available video adapters and enumerate all monitors 
                 WindowsDisplayDevice dev1 = new WindowsDisplayDevice(), dev2 = new WindowsDisplayDevice();
-                GCHandle Pinneddev1 = GCHandle.Alloc(dev1);
-                while (Functions.EnumDisplayDevices(null, device_count++, dev1, 0))
+                while (Functions.EnumDisplayDevicesW(null, device_count++, dev1, 0))
                 {
                     if ((dev1.StateFlags & DisplayDeviceStateFlags.AttachedToDesktop) == DisplayDeviceStateFlags.None)
                         continue;
 
                     DeviceMode monitor_mode = new DeviceMode();
-                    GCHandle Pinnedmonitor_mode = GCHandle.Alloc(monitor_mode);
-                    GCHandle Pinnedmonitor_mode2 = GCHandle.Alloc(monitor_mode.FormName);
+                    int devmodeSize = Marshal.SizeOf(typeof(DeviceMode));
+                    IntPtr p = Marshal.AllocHGlobal(devmodeSize * 100);
+                    Marshal.WriteInt16(p, 68, (Int16)devmodeSize);
                     // The second function should only be executed when the first one fails (e.g.
                     // when the monitor is disabled)
-                    if (Functions.EnumDisplaySettingsEx(dev1.DeviceName.ToString(), -1, monitor_mode, 0) ||
-                        Functions.EnumDisplaySettingsEx(dev1.DeviceName.ToString(), -2, monitor_mode, 0))
+                    if (Functions.EnumDisplaySettingsW(dev1.DeviceName.ToString(), -1, p))
                     {
-                        VerifyMode(dev1, monitor_mode);
+                        Byte[] data = new Byte[devmodeSize];
+                        Marshal.Copy(p, data, 0, devmodeSize);
+                        try
+                        {
+                            monitor_mode = new DeviceMode(data);
+                            VerifyMode(dev1, monitor_mode);
 
-                        float scale = 1;
+                            float scale = GetScale(ref monitor_mode);
 
-                        int x = (int)(monitor_mode.Position.X / scale);
-                        int y = (int)(monitor_mode.Position.Y / scale);
-                        int width = (int)(monitor_mode.PelsWidth / scale);
-                        int height = (int)(monitor_mode.PelsHeight / scale);
-                        int bpp = monitor_mode.BitsPerPel;
-                        int refresh = monitor_mode.DisplayFrequency;
-              
-                        opentk_dev_current_res = new DisplayResolution(
-                            (int)(monitor_mode.Position.X / scale), (int)(monitor_mode.Position.Y / scale),
-                            (int)(monitor_mode.PelsWidth / scale), (int)(monitor_mode.PelsHeight / scale),
-                            monitor_mode.BitsPerPel, monitor_mode.DisplayFrequency);
-
-                        opentk_dev_primary =
-                            (dev1.StateFlags & DisplayDeviceStateFlags.PrimaryDevice) != DisplayDeviceStateFlags.None;
+                            int x = (int)(monitor_mode.Position.X / scale);
+                            int y = (int)(monitor_mode.Position.Y / scale);
+                            int width = (int)(monitor_mode.PelsWidth / scale);
+                            int height = (int)(monitor_mode.PelsHeight / scale);
+                            int bpp = monitor_mode.BitsPerPel;
+                            int refresh = monitor_mode.DisplayFrequency;
+                            opentk_dev_current_res = new DisplayResolution(x, y, width, height, bpp, refresh);
+                            opentk_dev_primary = (dev1.StateFlags & DisplayDeviceStateFlags.PrimaryDevice) != DisplayDeviceStateFlags.None;
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e);
+                        }
                     }
+                    Marshal.FreeHGlobal(p);
+                    if (opentk_dev_primary == null || opentk_dev_current_res == null) continue;
                     opentk_dev_available_res.Clear();
-                  
-                    Pinnedmonitor_mode2.Free();
-                    Pinnedmonitor_mode.Free();
                     // Construct the OpenTK DisplayDevice through the accumulated parameters. The
                     // constructor will automatically add the DisplayDevice to the list of available devices.
                     opentk_dev = new DisplayDevice(
@@ -159,7 +161,6 @@ namespace OpenTK.Platform.Windows
                     foreach (DisplayDevice existingDevice in previousDevices)
                         if ((string)existingDevice.Id == (string)opentk_dev.Id)
                             opentk_dev.OriginalResolution = existingDevice.OriginalResolution;
-
                     AvailableDevices.Add(opentk_dev);
 
                     if (opentk_dev_primary)
@@ -167,7 +168,7 @@ namespace OpenTK.Platform.Windows
                     Debug.Print("DisplayDevice {0} ({1}) supports {2} resolutions.",
                         device_count, opentk_dev.IsPrimary ? "primary" : "secondary", opentk_dev.AvailableResolutions.Count);
                 }
-                Pinneddev1.Free();
+
             }
         }
 
