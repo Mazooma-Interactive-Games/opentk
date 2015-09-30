@@ -115,6 +115,14 @@ namespace OpenTK
             Z = v.Z;
         }
 
+
+        public Vector3(Vector2 value, float z)
+        {
+            X = value.X;
+            Y = value.Y;
+            Z = z;
+        }
+
         #endregion
 
         #region Public Members

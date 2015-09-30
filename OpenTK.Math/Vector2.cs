@@ -286,6 +286,64 @@ namespace OpenTK
 
         #endregion
 
+
+        public static void Max(ref Vector2 value1, ref Vector2 value2, out Vector2 result)
+        {
+            result = new Vector2(
+                Math.Max(value1.X, value2.X),
+                Math.Max(value1.Y, value2.Y));
+        }
+
+
+        public static void Min(ref Vector2 value1, ref Vector2 value2, out Vector2 result)
+        {
+            result = new Vector2(
+                Math.Min(value1.X, value2.X),
+                Math.Min(value1.Y, value2.Y));
+        }
+
+        public static float Distance(Vector2 value1, Vector2 value2)
+        {
+            float result;
+            DistanceSquared(ref value1, ref value2, out result);
+            return (float)Math.Sqrt(result);
+        }
+
+
+        public static void Distance(ref Vector2 value1, ref Vector2 value2, out float result)
+        {
+            DistanceSquared(ref value1, ref value2, out result);
+            result = (float)Math.Sqrt(result);
+        }
+
+        public static float DistanceSquared(Vector2 value1, Vector2 value2)
+        {
+            float result;
+            DistanceSquared(ref value1, ref value2, out result);
+            return result;
+        }
+
+        public static void DistanceSquared(ref Vector2 value1, ref Vector2 value2, out float result)
+        {
+            result = (value1.X - value2.X) * (value1.X - value2.X) + (value1.Y - value2.Y) * (value1.Y - value2.Y);
+        }
+
+
+        public static Vector2 CatmullRom(Vector2 value1, Vector2 value2, Vector2 value3, Vector2 value4, float amount)
+        {
+            return new Vector2(
+                MathHelper.CatmullRom(value1.X, value2.X, value3.X, value4.X, amount),
+                MathHelper.CatmullRom(value1.Y, value2.Y, value3.Y, value4.Y, amount));
+        }
+
+        public static void CatmullRom(ref Vector2 value1, ref Vector2 value2, ref Vector2 value3, ref Vector2 value4,
+                                      float amount, out Vector2 result)
+        {
+            result = new Vector2(
+                MathHelper.CatmullRom(value1.X, value2.X, value3.X, value4.X, amount),
+                MathHelper.CatmullRom(value1.Y, value2.Y, value3.Y, value4.Y, amount));
+        }
+
         /// <summary>
         /// Returns a copy of the Vector2 scaled to unit length.
         /// </summary>
@@ -973,6 +1031,24 @@ namespace OpenTK
             Quaternion.Multiply(ref t, ref i, out v);
 
             result = new Vector2(v.X, v.Y);
+        }
+
+
+        public static void Transform(Vector2[] sourceArray, ref Matrix4 matrix, Vector2[] destinationArray)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Vector2 Transform(Vector2 position, Matrix4 matrix)
+        {
+            Transform(ref position, ref matrix, out position);
+            return position;
+        }
+
+        public static void Transform(ref Vector2 position, ref Matrix4 matrix, out Vector2 result)
+        {
+            result = new Vector2((position.X * matrix.M11) + (position.Y * matrix.M21) + matrix.M41,
+                                 (position.X * matrix.M12) + (position.Y * matrix.M22) + matrix.M42);
         }
 
         #endregion
