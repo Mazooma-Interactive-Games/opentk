@@ -8,19 +8,19 @@
     <OutputType>Library</OutputType>
     <RootNamespace>OpenTK.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>OpenTK-1.1</AssemblyName>
+    <AssemblyName>OpenTK.iOS</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Binaries\iOS\Debug</OutputPath>
+    <OutputPath>..\..\..\..\Build\Debug\</OutputPath>
     <DefineConstants>DEBUG;__UNIFIED__;__MOBILE__;__IOS__;IPHONE;OPENGLES;OPENTK_1;OPENTK_1_1;XAMCORE_2_0</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <DocumentationFile>..\..\..\Binaries\iOS\Debug\OpenTK.1.1.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\Build\Debug\OpenTK.iOS.XML</DocumentationFile>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterBuild" command="mono ../../Tools/Debug/Rewrite.exe ${TargetFile} ../../../OpenTK.snk -debug" workingdir="${TargetDir}" />
@@ -30,14 +30,14 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\..\Binaries\iOS\Release</OutputPath>
+    <OutputPath>..\..\..\..\Build\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <DebugSymbols>true</DebugSymbols>
     <DefineConstants>__UNIFIED__;__MOBILE__;__IOS__;IPHONE;OPENGLES;OPENTK_1;OPENTK_1_1;XAMCORE_2_0</DefineConstants>
-    <DocumentationFile>..\..\..\Binaries\iOS\Release\OpenTK.1.1.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\..\Build\Release\OpenTK.iOS.XML</DocumentationFile>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterBuild" command="mono ../../Tools/Debug/Rewrite.exe ${TargetFile} ../../../OpenTK.snk" workingdir="${TargetDir}" />
@@ -45,7 +45,7 @@
     </CustomCommands>
   </PropertyGroup>
   <PropertyGroup>
-    <RunPostBuildEvent>Always</RunPostBuildEvent>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Xamarin.iOS">
@@ -514,11 +514,7 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <Target Name="AfterBuild">
-    <Exec Command="mono $(OutputPath)..\..\Tools\Debug\Rewrite.exe $(OutputPath)$(AssemblyName).dll ..\..\..\OpenTK.snk -debug" Condition="$(OS) != 'Windows_NT' and $(Configuration) == 'Debug'" />
-    <Exec Command="mono $(OutputPath)..\..\Tools\Release\Rewrite.exe $(OutputPath)$(AssemblyName).dll ..\..\..\OpenTK.snk" Condition="$(OS) != 'Windows_NT' and $(Configuration) != 'Debug'" />
-  </Target>
   <PropertyGroup>
-    <PostBuildEvent>..\..\Tools\Debug\Rewrite.exe OpenTK-1.1.dll ..\..\..\OpenTK.snk -debug</PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)OpenTK\Binaries\Tools\Release\Rewrite.exe" "$(TargetPath)" "$(SolutionDir)OpenTK\OpenTK.snk"</PostBuildEvent>
   </PropertyGroup>
 </Project>

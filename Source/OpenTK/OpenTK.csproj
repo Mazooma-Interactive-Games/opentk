@@ -47,10 +47,10 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>DEBUG;TRACE;WIN32;CARBON;COCOA;X11;SDL2;OPENGL;OPENGLES</DefineConstants>
-    <DocumentationFile>..\..\Binaries\OpenTK\Debug\OpenTK.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\Build\Debug\OpenTK.XML</DocumentationFile>
     <FileAlignment>4096</FileAlignment>
     <Optimize>False</Optimize>
-    <OutputPath>..\..\Binaries\OpenTK\Debug\</OutputPath>
+    <OutputPath>..\..\..\Build\Debug\</OutputPath>
     <RegisterForComInterop>False</RegisterForComInterop>
     <RemoveIntegerChecks>False</RemoveIntegerChecks>
     <WarningLevel>4</WarningLevel>
@@ -65,10 +65,10 @@
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
     <DefineConstants>WIN32;CARBON;COCOA;X11;SDL2;OPENGL;OPENGLES</DefineConstants>
-    <DocumentationFile>..\..\Binaries\OpenTK\Release\OpenTK.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\Build\Release\OpenTK.XML</DocumentationFile>
     <FileAlignment>4096</FileAlignment>
     <Optimize>True</Optimize>
-    <OutputPath>..\..\Binaries\OpenTK\Release\</OutputPath>
+    <OutputPath>..\..\..\Build\Release\</OutputPath>
     <RegisterForComInterop>False</RegisterForComInterop>
     <RemoveIntegerChecks>False</RemoveIntegerChecks>
     <WarningLevel>4</WarningLevel>
@@ -83,6 +83,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\..\OpenTK.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System">
@@ -655,23 +658,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>
-    </PreBuildEvent>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)OpenTK\Binaries\Tools\Release\Rewrite.exe" "$(TargetPath)" "$(SolutionDir)OpenTK\OpenTK.snk"</PostBuildEvent>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\OpenTK.Math\OpenTK.Math.csproj">
-      <Project>{767ED049-581C-45FF-80A4-335827719124}</Project>
-      <Name>OpenTK.Math</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Target Name="AfterBuild">
-    <Exec Command="$(OutputPath)..\..\Tools\Debug\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk -debug" Condition="$(OS) == 'Windows_NT' and $(Configuration) == 'Debug'" />
-    <Exec Command="$(OutputPath)..\..\Tools\Release\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk" Condition="$(OS) == 'Windows_NT' and $(Configuration) != 'Debug'" />
-    <Exec Command="mono $(OutputPath)..\..\Tools\Debug\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk -debug" Condition="$(OS) != 'Windows_NT' and $(Configuration) == 'Debug'" />
-    <Exec Command="mono $(OutputPath)..\..\Tools\Release\Rewrite.exe $(OutputPath)OpenTK.dll ..\..\OpenTK.snk" Condition="$(OS) != 'Windows_NT' and $(Configuration) != 'Debug'" />
-  </Target>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>
@@ -686,5 +674,10 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\OpenTK.Math\OpenTK.Math.csproj">
+      <Project>{767ed049-581c-45ff-80a4-335827719124}</Project>
+      <Name>OpenTK.Math</Name>
+    </ProjectReference>
+  </ItemGroup>
 </Project>
