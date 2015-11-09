@@ -67,7 +67,7 @@ namespace OpenTK.Graphics
 
         static bool share_contexts = true;
         static bool direct_rendering = true;
-        readonly static object SyncRoot = new object();        
+        readonly static object SyncRoot = new object();
         // Maps OS-specific context handles to GraphicsContext instances.
         readonly static Dictionary<ContextHandle, IGraphicsContext> available_contexts =
             new Dictionary<ContextHandle, IGraphicsContext>();
@@ -116,17 +116,17 @@ namespace OpenTK.Graphics
                 if (minor < 0)
                     minor = 0;
 
-               // Debug.Print("Creating GraphicsContext.");
+                // Debug.Print("Creating GraphicsContext.");
                 try
                 {
-                //    Debug.Indent();
-                //    Debug.Print("GraphicsMode: {0}", mode);
-                //    Debug.Print("IWindowInfo: {0}", window);
-                 //   Debug.Print("GraphicsContextFlags: {0}", flags);
-                 //   Debug.Print("Requested version: {0}.{1}", major, minor);
+                    //    Debug.Indent();
+                    //    Debug.Print("GraphicsMode: {0}", mode);
+                    //    Debug.Print("IWindowInfo: {0}", window);
+                    //   Debug.Print("GraphicsContextFlags: {0}", flags);
+                    //   Debug.Print("Requested version: {0}.{1}", major, minor);
 
                     IGraphicsContext shareContext = shareContext = FindSharedContext();
-                    
+
                     // Todo: Add a DummyFactory implementing IPlatformFactory.
                     if (designMode)
                     {
@@ -160,7 +160,77 @@ namespace OpenTK.Graphics
                 }
                 finally
                 {
-              //      Debug.Unindent();
+                    //      Debug.Unindent();
+                }
+            }
+        }
+
+
+        public GraphicsContext(GraphicsMode mode, IWindowInfo window, int major, int minor, GraphicsContextFlags flags, IGraphicsContext shareContext)
+        {
+            lock (SyncRoot)
+            {
+                bool designMode = false;
+#if !IPHONE
+                // Todo: we need to pass a proper GraphicsMode and IWindowInfo
+                // for iOS
+                if (mode == null && window == null)
+                    designMode = true;
+                else if (mode == null) throw new ArgumentNullException("mode", "Must be a valid GraphicsMode.");
+                else if (window == null) throw new ArgumentNullException("window", "Must point to a valid window.");
+#endif
+
+                // Silently ignore invalid major and minor versions.
+                if (major <= 0)
+                    major = 1;
+                if (minor < 0)
+                    minor = 0;
+
+                // Debug.Print("Creating GraphicsContext.");
+                try
+                {
+                    //    Debug.Indent();
+                    //    Debug.Print("GraphicsMode: {0}", mode);
+                    //    Debug.Print("IWindowInfo: {0}", window);
+                    //   Debug.Print("GraphicsContextFlags: {0}", flags);
+                    //   Debug.Print("Requested version: {0}.{1}", major, minor);
+
+
+
+                    // Todo: Add a DummyFactory implementing IPlatformFactory.
+                    if (designMode)
+                    {
+                        implementation = new Platform.Dummy.DummyGLContext();
+                    }
+                    else
+                    {
+                        IPlatformFactory factory = null;
+                        switch ((flags & GraphicsContextFlags.Embedded) == GraphicsContextFlags.Embedded)
+                        {
+                            case false: factory = Factory.Default; break;
+                            case true: factory = Factory.Embedded; break;
+                        }
+
+                        // Note: this approach does not allow us to mix native and EGL contexts in the same process.
+                        // This should not be a problem, as this use-case is not interesting for regular applications.
+                        // Note 2: some platforms may not support a direct way of getting the current context
+                        // (this happens e.g. with DummyGLContext). In that case, we use a slow fallback which
+                        // iterates through all known contexts and checks if any is current (check GetCurrentContext
+                        // declaration).
+                        if (GetCurrentContext == null)
+                        {
+                            GetCurrentContext = factory.CreateGetCurrentGraphicsContext();
+                        }
+
+                        implementation = factory.CreateGLContext(mode, window, shareContext, direct_rendering, major, minor, flags);
+                        handle_cached = ((IGraphicsContextInternal)implementation).Context;
+                    }
+
+                    AddContext(this);
+                }
+                finally
+                {
+                    //      Debug.Unindent();
                 }
             }
         }
@@ -291,8 +361,8 @@ namespace OpenTK.Graphics
             }
             else
             {
-               // Debug.Print("A GraphicsContext with handle {0} already exists.", ctx);
-              //  Debug.Print("Did you forget to call Dispose()?");
+                // Debug.Print("A GraphicsContext with handle {0} already exists.", ctx);
+                //  Debug.Print("Did you forget to call Dispose()?");
                 available_contexts[ctx] = (IGraphicsContext)context;
             }
         }
@@ -306,7 +376,7 @@ namespace OpenTK.Graphics
             }
             else
             {
-            //    Debug.Print("Tried to remove non-existent GraphicsContext handle {0}. Call Dispose() to avoid this error.", ctx);
+                //    Debug.Print("Tried to remove non-existent GraphicsContext handle {0}. Call Dispose() to avoid this error.", ctx);
             }
         }
 
@@ -558,7 +628,7 @@ namespace OpenTK.Graphics
 
             implementation.LoadAll();
         }
-        
+
         #endregion
 
         #region --- IGraphicsContextInternal Members ---
@@ -655,13 +725,13 @@ namespace OpenTK.Graphics
                 // This is also known to crash GLX implementations.
                 if (manual)
                 {
-                  //  Debug.Print("Disposing context {0}.", (this as IGraphicsContextInternal).Context.ToString());
+                    //  Debug.Print("Disposing context {0}.", (this as IGraphicsContextInternal).Context.ToString());
                     if (implementation != null)
                         implementation.Dispose();
                 }
                 else
                 {
-                  //  Debug.WriteLine("GraphicsContext leaked, did you forget to call Dispose()?");
+                    //  Debug.WriteLine("GraphicsContext leaked, did you forget to call Dispose()?");
                 }
                 IsDisposed = true;
             }
@@ -671,7 +741,7 @@ namespace OpenTK.Graphics
         /// Marks this context as deleted, but does not actually release unmanaged resources
         /// due to the threading requirements of OpenGL. Use <see cref="GraphicsContext.Dispose()"/>
         /// instead.
-       /// </summary>
+        /// </summary>
         ~GraphicsContext()
         {
             Dispose(false);
