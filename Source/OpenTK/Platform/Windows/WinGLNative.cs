@@ -1470,6 +1470,11 @@ namespace OpenTK.Platform.Windows
             get { return child_window; }
         }
 
+        public IWindowInfo ActualWindowInfo
+        {
+            get { return window; }
+        }
+
         #endregion
 
         #endregion
