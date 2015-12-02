@@ -298,6 +298,10 @@ namespace OpenTK.Platform.iPhoneOS
         void AssertContext()
         {
             if (GraphicsContext == null)
+            {
+                CreateFrameBuffer();
+            }
+            if (GraphicsContext == null)
                 throw new InvalidOperationException("Operation requires a GraphicsContext, which hasn't been created yet.");
         }
 
@@ -312,8 +316,8 @@ namespace OpenTK.Platform.iPhoneOS
             set
             {
                 AssertValid();
-                if (GraphicsContext != null)
-                    throw new NotSupportedException("Can't change RenderingApi after GraphicsContext is constructed.");
+                if (GraphicsContext != null) return;
+                 
                 this.api = value;
             }
         }
@@ -729,8 +733,8 @@ namespace OpenTK.Platform.iPhoneOS
             if (AutoResize && (Math.Round(bounds.Width) != Size.Width ||
                         Math.Round(bounds.Height) != Size.Height))
             {
-                DestroyFrameBuffer();
-                CreateFrameBuffer();
+                //DestroyFrameBuffer();
+               // CreateFrameBuffer();
             }
         }
 
@@ -920,8 +924,8 @@ namespace OpenTK.Platform.iPhoneOS
                     frameBufferWindow != null && ((UIWindow)frameBufferWindow.Target) != window)
                 {
 
-                    DestroyFrameBuffer();
-                    CreateFrameBuffer();
+                   // DestroyFrameBuffer();
+                  //  CreateFrameBuffer();
                 }
 
                 Resume();
