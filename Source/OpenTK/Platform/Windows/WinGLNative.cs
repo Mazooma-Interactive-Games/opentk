@@ -138,14 +138,10 @@ namespace OpenTK.Platform.Windows
                 // bound to the top-level window, but rather to a child window docked in the parent.
                 window = new WinWindowInfo(
                     CreateWindow(
-                        scale_x, scale_y, scale_width, scale_height,
+                        x, y, width, height,
                         title, options, device, IntPtr.Zero),
                     null);
-                child_window = new WinWindowInfo(
-                    CreateWindow(
-                        0, 0, ClientSize.Width, ClientSize.Height,
-                        title, options, device, window.Handle),
-                    window);
+                child_window = window;
 
                 exists = true;
             }
@@ -281,9 +277,9 @@ namespace OpenTK.Platform.Windows
                         Functions.GetClientRect(handle, out rect);
                         client_rectangle = rect.ToRectangle();
 
-                        Functions.SetWindowPos(child_window.Handle, IntPtr.Zero, 0, 0, ClientRectangle.Width, ClientRectangle.Height,
-                            SetWindowPosFlags.NOZORDER | SetWindowPosFlags.NOOWNERZORDER |
-                            SetWindowPosFlags.NOACTIVATE | SetWindowPosFlags.NOSENDCHANGING);
+                        //Functions.SetWindowPos(child_window.Handle, IntPtr.Zero, 0, 0, ClientRectangle.Width, ClientRectangle.Height,
+                        //    SetWindowPosFlags.NOZORDER | SetWindowPosFlags.NOOWNERZORDER |
+                        //    SetWindowPosFlags.NOACTIVATE | SetWindowPosFlags.NOSENDCHANGING);
 
                         if (suppress_resize <= 0)
                             OnResize(EventArgs.Empty);
@@ -641,7 +637,7 @@ namespace OpenTK.Platform.Windows
                 Functions.UnregisterClass(ClassName, Instance);
             }
             window.Dispose();
-            child_window.Dispose();
+           // child_window.Dispose();
 
             OnClosed(EventArgs.Empty);
         }
