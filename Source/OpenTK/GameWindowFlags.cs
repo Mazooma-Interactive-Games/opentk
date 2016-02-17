@@ -49,5 +49,7 @@ namespace OpenTK
         /// Indicates that the GameWindow should be a fixed window.
         /// </summary>
         FixedWindow = 2,
+
+        Borderless = 4
     }
 }

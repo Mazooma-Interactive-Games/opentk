@@ -136,42 +136,6 @@ namespace OpenTK.Platform.Windows
                     ModeSelector = new WinGraphicsMode(window.DeviceContext);
                     Mode = SetGraphicsModePFD(ModeSelector, format, (WinWindowInfo)window);
 
-                    if (Wgl.SupportsFunction("wglCreateContextAttribsARB"))
-                    {
-                        try
-                        {
-                            Debug.Write("Using WGL_ARB_create_context... ");
-
-                            List<int> attributes = new List<int>();
-                            attributes.Add((int)ArbCreateContext.MajorVersion);
-                            attributes.Add(major);
-                            attributes.Add((int)ArbCreateContext.MinorVersion);
-                            attributes.Add(minor);
-                            if (flags != 0)
-                            {
-                                attributes.Add((int)ArbCreateContext.ContextFlags);
-                                attributes.Add((int)GetARBContextFlags(flags));
-                                attributes.Add((int)ArbCreateContext.ProfileMask);
-                                attributes.Add((int)GetARBContextProfile(flags));
-                            }
-                            // According to the docs, " <attribList> specifies a list of attributes for the context.
-                            // The list consists of a sequence of <name,value> pairs terminated by the
-                            // value 0. [...]"
-                            // Is this a single 0, or a <0, 0> pair? (Defensive coding: add two zeroes just in case).
-                            attributes.Add(0);
-                            attributes.Add(0);
-
-                            Handle = new ContextHandle(
-                                Wgl.Arb.CreateContextAttribs(
-                                    window.DeviceContext,
-                                    sharedContext != null ? (sharedContext as IGraphicsContextInternal).Context.Handle : IntPtr.Zero,
-                                    attributes.ToArray()));
-                            if (Handle == ContextHandle.Zero)
-                                Debug.Print("failed. (Error: {0})", Marshal.GetLastWin32Error());
-                        }
-                        catch (Exception e) { Debug.Print(e.ToString()); }
-                    }
-
                     if (Handle == ContextHandle.Zero)
                     {
                         // Failed to create GL3-level context, fall back to GL2.
@@ -211,7 +175,7 @@ namespace OpenTK.Platform.Windows
             // using the new entry points.)
             // Sigh...
             MakeCurrent(window);
-            new Wgl().LoadEntryPoints();
+            //      new Wgl().LoadEntryPoints();
 
             if (sharedContext != null)
             {

@@ -141,11 +141,8 @@ namespace OpenTK.Platform.Windows
                         scale_x, scale_y, scale_width, scale_height,
                         title, options, device, IntPtr.Zero),
                     null);
-                child_window = new WinWindowInfo(
-                    CreateWindow(
-                        0, 0, ClientSize.Width, ClientSize.Height,
-                        title, options, device, window.Handle),
-                    window);
+                child_window = window;
+
 
                 exists = true;
             }
@@ -607,10 +604,13 @@ namespace OpenTK.Platform.Windows
             CreateStruct cs = (CreateStruct)Marshal.PtrToStructure(lParam, typeof(CreateStruct));
             if (cs.hwndParent == IntPtr.Zero)
             {
-                bounds.X = cs.x;
-                bounds.Y = cs.y;
-                bounds.Width = cs.cx;
-                bounds.Height = cs.cy;
+                if (windowBorder != WindowBorder.Hidden)
+                {
+                    bounds.X = cs.x;
+                    bounds.Y = cs.y;
+                    bounds.Width = cs.cx;
+                    bounds.Height = cs.cy;
+                }
 
                 Win32Rectangle rect;
                 Functions.GetClientRect(handle, out rect);
@@ -839,7 +839,7 @@ namespace OpenTK.Platform.Windows
             ExtendedWindowStyle ex_style = 0;
             if (parentHandle == IntPtr.Zero)
             {
-                style |= WindowStyle.OverlappedWindow | WindowStyle.ClipChildren;
+                style |=  (options != GameWindowFlags.Borderless)?WindowStyle.OverlappedWindow : 0;
                 ex_style = ParentStyleEx;
             }
             else
@@ -851,10 +851,10 @@ namespace OpenTK.Platform.Windows
             // Find out the final window rectangle, after the WM has added its chrome (titlebar, sidebars etc).
             Win32Rectangle rect = new Win32Rectangle();
             rect.left = x; rect.top = y; rect.right = x + width; rect.bottom = y + height;
-            Functions.AdjustWindowRectEx(ref rect, style, false, ex_style);
+            if ((options != GameWindowFlags.Borderless)) Functions.AdjustWindowRectEx(ref rect, style, false, ex_style);
 
-            // Create the window class that we will use for this window.
-            // The current approach is to register a new class for each top-level WinGLWindow we create.
+            //            // Create the window class that we will use for this window.
+            //            // The current approach is to register a new class for each top-level WinGLWindow we create.
             if (!class_registered)
             {
                 ExtendedWindowClass wc = new ExtendedWindowClass();
@@ -1353,7 +1353,7 @@ namespace OpenTK.Platform.Windows
                 WindowState state = WindowState;
                 ResetWindowState();
 
-                WindowStyle old_style = WindowStyle.ClipChildren | WindowStyle.ClipSiblings;
+                WindowStyle old_style = 0;
                 WindowStyle new_style = old_style;
 
                 switch (value)
@@ -1374,17 +1374,20 @@ namespace OpenTK.Platform.Windows
 
                 // Make sure client size doesn't change when changing the border style.
                 Size client_size = ClientSize;
-                Win32Rectangle rect = Win32Rectangle.From(client_size);
-                Functions.AdjustWindowRectEx(ref rect, new_style, false, ParentStyleEx);
+                Win32Rectangle rect = (windowBorder != WindowBorder.Hidden) ? Win32Rectangle.From(client_size) : Win32Rectangle.From(Bounds);
+                if (windowBorder != WindowBorder.Hidden) Functions.AdjustWindowRectEx(ref rect, new_style, false, ParentStyleEx);
 
                 // This avoids leaving garbage on the background window.
                 if (was_visible)
                     Visible = false;
 
                 Functions.SetWindowLong(window.Handle, GetWindowLongOffsets.STYLE, (IntPtr)(int)new_style);
-                Functions.SetWindowPos(window.Handle, IntPtr.Zero, 0, 0, rect.Width, rect.Height,
-                    SetWindowPosFlags.NOMOVE | SetWindowPosFlags.NOZORDER |
-                    SetWindowPosFlags.FRAMECHANGED);
+                if (windowBorder != WindowBorder.Hidden)
+                {
+                    Functions.SetWindowPos(window.Handle, IntPtr.Zero, 0, 0, rect.Width, rect.Height,
+                          SetWindowPosFlags.NOMOVE | SetWindowPosFlags.NOZORDER | SetWindowPosFlags.NOSIZE |
+                         SetWindowPosFlags.FRAMECHANGED);
+                }
 
                 // Force window to redraw update its borders, but only if it's
                 // already visible (invisible windows will change borders when

@@ -64,7 +64,7 @@ namespace OpenTK
 
         /// <summary>Constructs a new NativeWindow with default attributes without enabling events.</summary>
         public NativeWindow()
-            : this(640, 480, "OpenTK Native Window", GameWindowFlags.Default, GraphicsMode.Default, DisplayDevice.Default) { }
+            : this(1, 1, "OpenTK Native Window", GameWindowFlags.Default, GraphicsMode.Default, DisplayDevice.Default) { }
 
         // TODO: Remaining constructors.
 
@@ -97,7 +97,26 @@ namespace OpenTK
             : this(device.Bounds.Left + (device.Bounds.Width - width) / 2,
                 device.Bounds.Top + (device.Bounds.Height - height) / 2,
                 width, height, title, options, mode, device,
-                1, 0, GraphicsContextFlags.Default) { }
+                1, 0, GraphicsContextFlags.Default)
+        { }
+
+        /// <summary>Constructs a new NativeWindow with the specified attributes.</summary>
+        /// <param name="x">Horizontal screen space coordinate of the NativeWindow's origin.</param>
+        /// <param name="y">Vertical screen space coordinate of the NativeWindow's origin.</param>
+        /// <param name="width">The width of the NativeWindow in pixels.</param>
+        /// <param name="height">The height of the NativeWindow in pixels.</param>
+        /// <param name="title">The title of the NativeWindow.</param>
+        /// <param name="options">GameWindow options specifying window appearance and behavior.</param>
+        /// <param name="mode">The OpenTK.Graphics.GraphicsMode of the NativeWindow.</param>
+        /// <param name="device">The OpenTK.Graphics.DisplayDevice to construct the NativeWindow in.</param>
+        /// <exception cref="System.ArgumentOutOfRangeException">If width or height is less than 1.</exception>
+        /// <exception cref="System.ArgumentNullException">If mode or device is null.</exception>
+        public NativeWindow(Vector2 pos, int width, int height, string title, GameWindowFlags options, GraphicsMode mode, DisplayDevice device)
+            : this((int)pos.X,
+               (int)pos.Y,
+                width, height, title, options, mode, device,
+                2, 0, GraphicsContextFlags.Default)
+        { }
 
         /// <summary>Constructs a new NativeWindow with the specified attributes.</summary>
         /// <param name="x">Horizontal screen space coordinate of the NativeWindow's origin.</param>
@@ -140,11 +159,6 @@ namespace OpenTK
                     this.device.ChangeResolution(width, height, mode.ColorFormat.BitsPerPixel, 0);
                 }
                 WindowState = WindowState.Fullscreen;
-            }
-
-            if ((options & GameWindowFlags.FixedWindow) != 0)
-            {
-                WindowBorder = WindowBorder.Fixed;
             }
         }
 
